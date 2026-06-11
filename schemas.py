@@ -71,6 +71,7 @@ class VagaOut(VagaBase):
     id: int
     id_empresa: int
     status: str
+    empresa: Optional[EmpresaOut] = None
     class Config:
         from_attributes = True
 

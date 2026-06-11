@@ -131,9 +131,12 @@ export default function MuralVagas() {
                   </svg>
                 </button>
                 
-                <div className="w-12 h-12 bg-neutral-900 rounded-md mb-4 flex items-center justify-center text-white text-xs font-bold">
-                  {/* Placeholder de logo */}
-                  {vaga.id_empresa}
+                <div className="w-12 h-12 bg-[#3D251E] rounded-md mb-4 flex items-center justify-center text-white overflow-hidden shadow-sm">
+                  {vaga.empresa?.logotipo ? (
+                    <img src={vaga.empresa.logotipo} alt="Logo" className="w-full h-full object-cover" />
+                  ) : (
+                    <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(vaga.empresa?.nome_fantasia || vaga.empresa?.razao_social || 'Empresa')}&background=3D251E&color=fff&bold=true`} alt="Logo" className="w-full h-full object-cover" />
+                  )}
                 </div>
                 
                 <div className="flex-1">
@@ -143,15 +146,14 @@ export default function MuralVagas() {
                   <div className="flex items-center gap-4 text-sm text-neutral-600 mb-4">
                     <div className="flex items-center gap-1">
                       <BuildingOfficeIcon className="h-4 w-4" />
-                      Empresa {vaga.id_empresa}
+                      {vaga.empresa?.nome_fantasia || vaga.empresa?.razao_social || `Empresa ${vaga.id_empresa}`}
                     </div>
                     <div className="flex items-center gap-1">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                       </svg>
-                      {/* Local placeholder */}
-                      Brasil
+                      {vaga.cidade || 'Brasil'}
                     </div>
                   </div>
                 </div>
