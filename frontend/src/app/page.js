@@ -77,14 +77,14 @@ export default function MuralVagas() {
   };
 
   return (
-    <div className="flex-1 bg-neutral-50 flex flex-col relative">
-      <section className="bg-primary-50 py-16 px-4">
+    <div className="flex-1 bg-[#fff8f6] flex flex-col relative pb-20">
+      <section className="pt-12 pb-8 px-5">
         <div className="max-w-md mx-auto text-left">
           <div className="flex items-center gap-2 mb-8 text-neutral-900">
             <BriefcaseIcon className="w-6 h-6" />
             <span className="text-xl font-bold">Trampou</span>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight mb-4 text-neutral-900 leading-tight">
+          <h1 className="text-4xl font-bold tracking-tight mb-4 text-[#3D251E] leading-tight">
             Encontre o seu <br/> próximo legado.
           </h1>
           <p className="text-base text-neutral-600 mb-8 max-w-sm">
