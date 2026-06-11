@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export default function PerfilEmpresa() {
   const router = useRouter();
@@ -63,11 +64,11 @@ export default function PerfilEmpresa() {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] pb-20">
-      <header className="bg-white border-b border-neutral-100 px-6 py-4 flex items-center justify-between sticky top-0 z-10 shadow-sm">
-        <h1 className="text-xl font-bold text-[#000000]">Editar Perfil</h1>
-        <button onClick={() => router.back()} className="text-[#000000] font-medium text-sm">
-          Voltar
+      <header className="bg-white border-b border-neutral-100 px-4 py-4 flex items-center sticky top-0 z-10 shadow-sm">
+        <button onClick={() => router.back()} className="mr-4 text-neutral-900 hover:bg-neutral-100 p-2 rounded-full transition-colors">
+          <ArrowLeftIcon className="w-6 h-6" />
         </button>
+        <h1 className="text-xl font-bold text-[#000000] flex-1 text-center pr-10">Editar Perfil</h1>
       </header>
       
       <main className="p-6">

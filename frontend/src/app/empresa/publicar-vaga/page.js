@@ -49,14 +49,15 @@ export default function PublicarVaga() {
   }
 
   return (
-    <div className="bg-neutral-50 font-sans min-h-screen pt-8 pb-20">
-      <main className="px-5 max-w-2xl mx-auto w-full">
-        <div className="flex items-center gap-4 mb-6">
-          <Link href="/empresa/dashboard" className="p-2 hover:bg-neutral-200 rounded-full transition-colors">
-            <ArrowLeftIcon className="w-5 h-5 text-neutral-600" />
-          </Link>
-          <h1 className="text-2xl font-bold text-neutral-900">Publicar Nova Vaga</h1>
-        </div>
+    <div className="bg-[#FAFAFA] font-sans min-h-screen flex flex-col pb-20">
+      <header className="bg-white border-b border-neutral-100 px-4 py-4 flex items-center sticky top-0 z-10 shadow-sm">
+        <button onClick={() => router.back()} className="mr-4 text-neutral-900 hover:bg-neutral-100 p-2 rounded-full transition-colors">
+          <ArrowLeftIcon className="w-6 h-6" />
+        </button>
+        <h1 className="text-xl font-bold text-[#000000] flex-1 text-center pr-10">Publicar Vaga</h1>
+      </header>
+      <div className="pt-6 pb-2">
+        <main className="px-5 max-w-2xl mx-auto w-full">
 
         {error && (
           <div className="bg-red-50 text-red-600 border border-red-200 p-4 rounded-lg mb-6 text-sm font-medium">
@@ -95,6 +96,7 @@ export default function PublicarVaga() {
           </div>
         </form>
       </main>
+      </div>
     </div>
   );
 }

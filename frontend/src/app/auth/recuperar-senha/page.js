@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export default function RecuperarSenha() {
   const [email, setEmail] = useState("");
@@ -44,6 +46,10 @@ export default function RecuperarSenha() {
           </div>
         ) : (
           <form onSubmit={handleRecuperar} className="space-y-4">
+            <Link href="/auth" className="flex items-center justify-center text-sm font-medium text-neutral-500 hover:text-neutral-700 transition-colors mb-4">
+              <ArrowLeftIcon className="w-4 h-4 mr-2" />
+              Voltar ao Login
+            </Link>
             <div className="text-left">
               <label className="block text-sm font-medium text-neutral-700 mb-1">E-mail</label>
               <input
@@ -62,15 +68,6 @@ export default function RecuperarSenha() {
             >
               Enviar Instruções
             </button>
-            <div className="mt-4">
-              <button
-                type="button"
-                onClick={() => router.push("/auth")}
-                className="text-sm text-[#000000] font-medium hover:underline"
-              >
-                Voltar ao Login
-              </button>
-            </div>
           </form>
         )}
       </div>
