@@ -2,8 +2,9 @@ services:
   - type: web
     name: trampou-api
     env: python
+    plan: free
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port 10000"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -12,5 +13,6 @@ services:
 
 databases:
   - name: trampou-db
+    plan: free
     databaseName: trampou
     user: trampou_user
