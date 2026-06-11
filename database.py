@@ -1,0 +1,29 @@
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
+from pydantic_settings import BaseSettings
+
+class Settings(BaseSettings):
+    database_url: str = "postgresql://postgres:123456@localhost:5432/trampou"
+    secret_key: str = "trampou_super_secret_key_123"
+    algorithm: str = "HS256"
+    access_token_expire_minutes: int = 1440 # 24 horas
+
+    class Config:
+        env_file = ".env"
+
+settings = Settings()
+
+engine = create_engine(
+    settings.database_url
+)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+Base = declarative_base()
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
