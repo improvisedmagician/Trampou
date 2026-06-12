@@ -9,6 +9,7 @@ export default function PerfilEmpresa() {
     nome_fantasia: "",
     endereco: "",
     descricao: "",
+    logotipo: "",
   });
   const [loading, setLoading] = useState(true);
 
@@ -29,6 +30,7 @@ export default function PerfilEmpresa() {
             nome_fantasia: data.nome_fantasia || "",
             endereco: data.endereco || "",
             descricao: data.descricao || "",
+            logotipo: data.logotipo || "",
           });
         }
       } catch (err) {
@@ -39,6 +41,34 @@ export default function PerfilEmpresa() {
     };
     fetchPerfil();
   }, [router]);
+
+  const handleLogoChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("foto", file); // usando 'foto' pois é o nome do parâmetro no backend
+
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch('https://trampou-api.onrender.com/empresas/me/logotipo', {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}` },
+        body: formData
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setPerfil(prev => ({...prev, logotipo: data.logotipo}));
+        alert("Logotipo atualizado com sucesso!");
+      } else {
+        const error = await res.json();
+        alert("Erro: " + error.detail);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao enviar logotipo.");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,7 +95,7 @@ export default function PerfilEmpresa() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] pb-20">
       <header className="bg-white border-b border-neutral-100 px-4 py-4 flex items-center sticky top-0 z-10 shadow-sm">
-        <button onClick={() => router.back()} className="mr-4 text-neutral-900 hover:bg-neutral-100 p-2 rounded-full transition-colors">
+        <button type="button" onClick={() => router.back()} className="mr-4 text-neutral-900 hover:bg-neutral-100 p-2 rounded-full transition-colors">
           <ArrowLeftIcon className="w-6 h-6" />
         </button>
         <h1 className="text-xl font-bold text-[#000000] flex-1 text-center pr-10">Editar Perfil</h1>
@@ -73,6 +103,19 @@ export default function PerfilEmpresa() {
       
       <main className="p-6">
         <form onSubmit={handleSubmit} className="space-y-4">
+          
+          {/* Avatar / Logotipo */}
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-neutral-100 flex flex-col items-center">
+            <label className="w-24 h-24 rounded-xl overflow-hidden border-2 border-neutral-200 shadow-sm mb-3 cursor-pointer relative group block">
+              <img alt="Logotipo" className="w-full h-full object-cover" src={perfil.logotipo || `https://ui-avatars.com/api/?name=${perfil.nome_fantasia || 'Empresa'}&background=000&color=fff&size=256`} />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-white text-xs font-bold text-center">Alterar<br/>Logo</span>
+              </div>
+              <input type="file" className="hidden" accept="image/*" onChange={handleLogoChange} />
+            </label>
+            <h2 className="text-sm font-bold text-neutral-500">Logotipo da Empresa</h2>
+          </div>
+
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-neutral-100">
             <h2 className="text-lg font-bold text-[#000000] mb-4">Informações Públicas</h2>
             

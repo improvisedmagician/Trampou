@@ -35,3 +35,30 @@ def update_empresa_me(empresa_update: schemas.EmpresaUpdate, db: Session = Depen
     db.commit()
     db.refresh(empresa_atual)
     return empresa_atual
+
+import os
+import shutil
+from fastapi import UploadFile, File
+
+@router.post("/me/logotipo", response_model=schemas.EmpresaOut)
+def upload_logotipo_empresa(
+    foto: UploadFile = File(...),
+    db: Session = Depends(database.get_db),
+    empresa_atual: models.Empresa = Depends(auth.get_current_empresa)
+):
+    if not foto.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="Apenas imagens são permitidas.")
+
+    os.makedirs("uploads", exist_ok=True)
+    file_extension = foto.filename.split(".")[-1]
+    file_name = f"empresa_{empresa_atual.id}_logo.{file_extension}"
+    file_path = os.path.join("uploads", file_name)
+
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(foto.file, buffer)
+
+    empresa_atual.logotipo = f"https://trampou-api.onrender.com/uploads/{file_name}"
+    db.commit()
+    db.refresh(empresa_atual)
+    
+    return empresa_atual
