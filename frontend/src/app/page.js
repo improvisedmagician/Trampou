@@ -28,6 +28,18 @@ export default function MuralVagas() {
         })
         .catch(err => {
           console.error("Erro ao buscar vagas", err);
+          // Send error to our new debug endpoint
+          try {
+            fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/debug/logs", {
+              method: "POST",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify({
+                source: "MuralVagas (page.js)",
+                message: "Falha ao buscar vagas",
+                error_details: err.toString()
+              })
+            });
+          } catch(e) {}
           setLoading(false);
         });
     }, 300); // 300ms debounce

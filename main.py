@@ -58,3 +58,26 @@ app.include_router(candidaturas.router)
 @app.get("/")
 def read_root():
     return {"message": "Bem-vindo à API do Trampou! As tabelas foram criadas com sucesso."}
+
+from pydantic import BaseModel
+import datetime
+
+class LogEntry(BaseModel):
+    source: str
+    message: str
+    error_details: str = ""
+
+@app.post("/debug/logs")
+def registrar_log(entry: LogEntry):
+    with open("system_logs.txt", "a", encoding="utf-8") as f:
+        timestamp = datetime.datetime.now().isoformat()
+        f.write(f"[{timestamp}] [{entry.source}] {entry.message} | Details: {entry.error_details}\n")
+    return {"status": "Log registrado"}
+
+@app.get("/debug/logs")
+def ler_logs():
+    try:
+        with open("system_logs.txt", "r", encoding="utf-8") as f:
+            return {"logs": f.readlines()}
+    except FileNotFoundError:
+        return {"logs": ["Nenhum log encontrado ainda."]}
