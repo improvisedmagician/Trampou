@@ -37,6 +37,34 @@ export default function CandidatoPerfil() {
 
   const [isEditing, setIsEditing] = useState(false);
 
+  const handleFotoChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("foto", file);
+
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch('https://trampou-api.onrender.com/candidatos/me/foto', {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}` },
+        body: formData
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setPerfil(prev => ({...prev, foto_perfil: data.foto_perfil}));
+        alert("Foto atualizada com sucesso!");
+      } else {
+        const error = await res.json();
+        alert("Erro: " + error.detail);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao enviar a foto.");
+    }
+  };
+
   if (loading) {
     return <div className="min-h-screen bg-[#ffffff] flex items-center justify-center font-sans">A carregar perfil...</div>;
   }
@@ -50,7 +78,7 @@ export default function CandidatoPerfil() {
         </Link>
         <h1 className="text-lg font-bold text-neutral-900">{isEditing ? "Editar Perfil" : "Meu Perfil Digital"}</h1>
         <div className="w-8 h-8 rounded-full overflow-hidden border border-neutral-200">
-          <img alt="Mini Avatar" className="w-full h-full object-cover" src={`https://ui-avatars.com/api/?name=${perfil?.nome}&background=1f2937&color=fff`} />
+          <img alt="Mini Avatar" className="w-full h-full object-cover" src={perfil?.foto_perfil || `https://ui-avatars.com/api/?name=${perfil?.nome}&background=1f2937&color=fff`} />
         </div>
       </header>
 
@@ -60,10 +88,14 @@ export default function CandidatoPerfil() {
           <div className="flex flex-col animate-fadeIn px-5">
             
             {/* Avatar Central Arredondado */}
-            <div className="flex flex-col items-center mt-10 mb-8">
-              <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-[#f27918] shadow-sm mb-4">
-                <img alt="Avatar" className="w-full h-full object-cover" src={`https://ui-avatars.com/api/?name=${perfil?.nome}&background=1f2937&color=fff&size=256`} />
-              </div>
+            <div className="flex flex-col items-center mt-10 mb-8 relative">
+              <label className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-[#f27918] shadow-sm mb-4 cursor-pointer relative group block">
+                <img alt="Avatar" className="w-full h-full object-cover" src={perfil?.foto_perfil || `https://ui-avatars.com/api/?name=${perfil?.nome}&background=1f2937&color=fff&size=256`} />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-white text-xs font-bold">Alterar</span>
+                </div>
+                <input type="file" className="hidden" accept="image/*" onChange={handleFotoChange} />
+              </label>
               <h2 className="text-xl font-bold text-neutral-900">{perfil?.nome}</h2>
               <p className="text-neutral-500 text-sm mt-1">{perfil?.resumo_profissional ? perfil.resumo_profissional.substring(0, 40) + "..." : "Candidato na Trampou"}</p>
             </div>
