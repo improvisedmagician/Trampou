@@ -38,7 +38,7 @@ export default function UploadCurriculo({ params }) {
     formData.append("curriculo", file);
 
     try {
-      const response = await fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/candidaturas/", {
+      const response = await fetch("https://trampou-api.onrender.com/candidaturas/", {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` },
         body: formData
