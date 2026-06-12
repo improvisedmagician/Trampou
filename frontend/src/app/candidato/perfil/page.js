@@ -232,7 +232,7 @@ export default function CandidatoPerfil() {
 
         <div className="flex flex-col items-center justify-center flex-1 text-neutral-400">
           <XCircleIcon className="w-6 h-6 mb-1" />
-          <span className="text-[10px] font-bold tracking-wider uppercase mt-1">Recusada ({perfil?.stats?.recusada || 0})</span>
+          <span className="text-[10px] font-bold tracking-wider uppercase mt-1">Reprovado ({perfil?.stats?.reprovado || 0})</span>
         </div>
       </footer>
     </div>

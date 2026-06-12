@@ -207,7 +207,39 @@ export default function EmpresaDashboard() {
                         <div>
                           <p className="font-bold text-neutral-900">{c.candidato?.nome || "Candidato Desconhecido"}</p>
                           <p className="text-sm text-neutral-600">{c.candidato?.email}</p>
-                          <p className="text-xs text-neutral-500 mt-1">Status: {c.status_triagem}</p>
+                          <div className="mt-2 flex items-center gap-2">
+                            <span className="text-xs text-neutral-500 font-medium">Status:</span>
+                            <select 
+                              value={c.status_triagem}
+                              onChange={async (e) => {
+                                const newStatus = e.target.value;
+                                const token = localStorage.getItem("token");
+                                try {
+                                  const res = await fetch(`https://trampou-api.onrender.com/candidaturas/${c.id}/status`, {
+                                    method: "PATCH",
+                                    headers: {
+                                      "Content-Type": "application/json",
+                                      "Authorization": `Bearer ${token}`
+                                    },
+                                    body: JSON.stringify({ status: newStatus })
+                                  });
+                                  if (res.ok) {
+                                    setCandidatos(prev => prev.map(cand => cand.id === c.id ? { ...cand, status_triagem: newStatus } : cand));
+                                  } else {
+                                    alert("Erro ao atualizar status");
+                                  }
+                                } catch (err) {
+                                  console.error(err);
+                                }
+                              }}
+                              className="text-xs bg-white border border-neutral-300 rounded px-2 py-1 outline-none focus:border-primary-500"
+                            >
+                              <option value="Em Análise">Em Análise</option>
+                              <option value="Entrevista">Entrevista</option>
+                              <option value="Aprovado">Aprovado</option>
+                              <option value="Reprovado">Reprovado</option>
+                            </select>
+                          </div>
                         </div>
                         <a 
                           href={pdfUrl}

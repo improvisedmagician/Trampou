@@ -78,9 +78,9 @@ def read_candidato_me(db: Session = Depends(database.get_db), candidato_atual: m
         models.Candidatura.status_triagem == "Entrevista"
     ).count()
     
-    recusada = db.query(models.Candidatura).filter(
+    reprovado = db.query(models.Candidatura).filter(
         models.Candidatura.fk_candidato == candidato_atual.id, 
-        models.Candidatura.status_triagem == "Recusada"
+        models.Candidatura.status_triagem == "Reprovado"
     ).count()
     
     return {
@@ -95,6 +95,6 @@ def read_candidato_me(db: Session = Depends(database.get_db), candidato_atual: m
         "stats": {
             "em_analise": em_analise,
             "entrevista": entrevista,
-            "recusada": recusada
+            "reprovado": reprovado
         }
     }
