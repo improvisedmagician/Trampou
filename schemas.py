@@ -96,3 +96,5 @@ class VagaDashboardOut(VagaOut):
 class CandidaturaDetail(CandidaturaOut):
     candidato: CandidatoOut
 
+class CandidaturaComVaga(CandidaturaOut):
+    vaga: VagaOut

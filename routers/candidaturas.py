@@ -34,6 +34,9 @@ def create_candidatura(
 
 from typing import List
 
+@router.get("/minhas", response_model=List[schemas.CandidaturaComVaga])
+def listar_minhas_candidaturas(db: Session = Depends(database.get_db), current_candidato: models.Candidato = Depends(auth.get_current_candidato)):
+    return db.query(models.Candidatura).filter(models.Candidatura.fk_candidato == current_candidato.id).all()
 @router.get("/vaga/{id_vaga}", response_model=List[schemas.CandidaturaDetail])
 def listar_candidaturas_vaga(id_vaga: int, db: Session = Depends(database.get_db), current_empresa: models.Empresa = Depends(auth.get_current_empresa)):
     vaga = db.query(models.Vaga).filter(models.Vaga.id == id_vaga).first()
