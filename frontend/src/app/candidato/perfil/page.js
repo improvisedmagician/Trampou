@@ -35,98 +35,171 @@ export default function CandidatoPerfil() {
       });
   }, [router]);
 
+  const [isEditing, setIsEditing] = useState(false);
+
   if (loading) {
     return <div className="min-h-screen bg-[#ffffff] flex items-center justify-center font-sans">A carregar perfil...</div>;
   }
 
   return (
-    <div className="bg-[#ffffff] text-neutral-900 font-sans min-h-screen flex flex-col relative pb-24">
-      {/* Header */}
-      <header className="flex items-center justify-between px-5 py-4 bg-[#ffffff] border-b border-neutral-100">
-        <Link href="/" className="p-2 -ml-2 text-primary-500 hover:bg-neutral-100 rounded-full transition-colors">
+    <div className="bg-[#fcfcfc] text-neutral-900 font-sans min-h-screen flex flex-col relative pb-24">
+      {/* Header Fixo */}
+      <header className="flex items-center justify-between px-5 py-4 bg-white border-b border-neutral-100 sticky top-0 z-10">
+        <Link href="/" className="p-2 -ml-2 text-neutral-900 hover:bg-neutral-100 rounded-full transition-colors">
           <ArrowLeftIcon className="w-6 h-6" />
         </Link>
-        <h1 className="text-xl font-bold text-neutral-900">Meu Perfil Digital</h1>
-        <div className="w-10 h-10 rounded-full overflow-hidden bg-neutral-200">
-          <img src={`https://ui-avatars.com/api/?name=${perfil?.nome}&background=4B2E2A&color=fff`} alt="Mini Avatar" className="w-full h-full object-cover"/>
-        </div>
+        <h1 className="text-xl font-bold text-neutral-900">{isEditing ? "Editar Perfil" : "Meu Perfil"}</h1>
+        <div className="w-8 h-8"></div> {/* Espaçador */}
       </header>
 
-      <main className="px-5 py-8 max-w-md mx-auto w-full flex-1">
-        {/* Avatar Central */}
-        <div className="flex flex-col items-center mb-6">
-          <div className="w-28 h-28 rounded-2xl overflow-hidden mb-4 shadow-lg border-2 border-primary-300">
-            <img alt="Avatar" className="w-full h-full object-cover" src={`https://ui-avatars.com/api/?name=${perfil?.nome}&background=4B2E2A&color=fff&size=256`} />
-          </div>
-          <h2 className="text-2xl font-bold text-neutral-900 mb-1">{perfil?.nome}</h2>
-          <p className="text-sm text-neutral-600 mb-4">Candidato na Trampou</p>
-        </div>
-
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          const token = localStorage.getItem("token");
-          fetch('https://trampou-api.onrender.com' + "/candidatos/me", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-            body: JSON.stringify({
-              nome: perfil.nome,
-              contato: perfil.contato,
-              resumo_profissional: perfil.resumo_profissional,
-              escolaridade: perfil.escolaridade,
-              habilidades: perfil.habilidades
-            })
-          }).then(res => res.json())
-            .then(data => alert("Perfil salvo com sucesso!"))
-            .catch(console.error);
-        }} className="space-y-4">
-          <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm">
-            <h4 className="font-bold text-neutral-900 mb-3 flex items-center gap-2">
-              <UserIcon className="w-5 h-5 text-primary-600" /> Dados Pessoais
-            </h4>
-            <div className="space-y-3">
-              <div>
-                <label className="block text-xs text-neutral-500 mb-1">Nome Completo</label>
-                <input type="text" className="w-full border rounded-lg p-2 text-sm outline-none focus:ring-1 focus:ring-primary-500" value={perfil.nome || ""} onChange={e => setPerfil({...perfil, nome: e.target.value})} />
-              </div>
-              <div>
-                <label className="block text-xs text-neutral-500 mb-1">Contato (Telefone/WhatsApp)</label>
-                <input type="text" className="w-full border rounded-lg p-2 text-sm outline-none focus:ring-1 focus:ring-primary-500" value={perfil.contato || ""} onChange={e => setPerfil({...perfil, contato: e.target.value})} />
+      <main className="flex-1 w-full max-w-md mx-auto flex flex-col">
+        {!isEditing ? (
+          // Visualização do Perfil (Tela 5 do PDF)
+          <div className="flex flex-col animate-fadeIn">
+            {/* Bloco de cor no topo com Avatar sobreposto */}
+            <div className="bg-[#3D251E] h-32 relative flex justify-center rounded-b-[30px] shadow-sm">
+              <div className="absolute -bottom-16 w-32 h-32 rounded-full border-4 border-white bg-white overflow-hidden shadow-md">
+                <img alt="Avatar" className="w-full h-full object-cover" src={`https://ui-avatars.com/api/?name=${perfil?.nome}&background=f27918&color=fff&size=256`} />
               </div>
             </div>
-          </div>
 
-          <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm">
-            <h4 className="font-bold text-neutral-900 mb-3 flex items-center gap-2">
-              <BriefcaseIcon className="w-5 h-5 text-primary-600" /> Experiência & Habilidades
-            </h4>
-            <div className="space-y-3">
-              <div>
-                <label className="block text-xs text-neutral-500 mb-1">Resumo Profissional / Experiência</label>
-                <textarea rows="3" className="w-full border rounded-lg p-2 text-sm outline-none focus:ring-1 focus:ring-primary-500" value={perfil.resumo_profissional || ""} onChange={e => setPerfil({...perfil, resumo_profissional: e.target.value})} />
-              </div>
-              <div>
-                <label className="block text-xs text-neutral-500 mb-1">Principais Habilidades</label>
-                <input type="text" placeholder="Ex: Vendas, Excel, Atendimento" className="w-full border rounded-lg p-2 text-sm outline-none focus:ring-1 focus:ring-primary-500" value={perfil.habilidades || ""} onChange={e => setPerfil({...perfil, habilidades: e.target.value})} />
-              </div>
+            <div className="mt-20 px-6 text-center">
+              <h2 className="text-2xl font-bold text-neutral-900 mb-1">{perfil?.nome}</h2>
+              <p className="text-[#f27918] font-semibold text-sm mb-5">Candidato na Trampou</p>
+              
+              <button onClick={() => setIsEditing(true)} className="border-2 border-neutral-200 text-neutral-800 font-bold px-8 py-2.5 rounded-full hover:bg-neutral-50 transition-colors shadow-sm text-sm">
+                Editar Perfil
+              </button>
+            </div>
+
+            <div className="px-6 mt-10 space-y-8">
+              <section>
+                <h3 className="text-lg font-bold text-neutral-900 mb-3 flex items-center gap-2">
+                  <UserIcon className="w-5 h-5 text-[#f27918]" /> Sobre Mim
+                </h3>
+                <p className="text-neutral-600 text-sm leading-relaxed bg-white p-4 rounded-2xl border border-neutral-100 shadow-sm">
+                  {perfil?.resumo_profissional || 'Nenhum resumo profissional adicionado. Edite o perfil para contar um pouco sobre si.'}
+                </p>
+              </section>
+
+              <section>
+                <h3 className="text-lg font-bold text-neutral-900 mb-3 flex items-center gap-2">
+                  <BriefcaseIcon className="w-5 h-5 text-[#f27918]" /> Habilidades
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {perfil?.habilidades ? perfil.habilidades.split(',').map((hab, i) => (
+                    <span key={i} className="bg-primary-50 text-[#f27918] border border-primary-100 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide">
+                      {hab.trim()}
+                    </span>
+                  )) : (
+                    <span className="text-neutral-500 text-sm">Nenhuma habilidade listada.</span>
+                  )}
+                </div>
+              </section>
+
+              <section>
+                <h3 className="text-lg font-bold text-neutral-900 mb-3 flex items-center gap-2">
+                  <AcademicCapIcon className="w-5 h-5 text-[#f27918]" /> Formação
+                </h3>
+                <div className="bg-white p-4 rounded-2xl border border-neutral-100 shadow-sm flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center flex-shrink-0">
+                    <AcademicCapIcon className="w-5 h-5 text-neutral-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-neutral-900 text-sm">{perfil?.escolaridade || 'Não informada'}</h4>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h3 className="text-lg font-bold text-neutral-900 mb-3 flex items-center gap-2">
+                  <ClipboardDocumentListIcon className="w-5 h-5 text-[#f27918]" /> Contato
+                </h3>
+                <div className="bg-white p-4 rounded-2xl border border-neutral-100 shadow-sm">
+                  <p className="text-neutral-600 text-sm">{perfil?.contato || 'Nenhum contato adicionado'}</p>
+                </div>
+              </section>
             </div>
           </div>
-
-          <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm">
-            <h4 className="font-bold text-neutral-900 mb-3 flex items-center gap-2">
-              <AcademicCapIcon className="w-5 h-5 text-primary-600" /> Educação
-            </h4>
-            <div className="space-y-3">
-              <div>
-                <label className="block text-xs text-neutral-500 mb-1">Escolaridade / Cursos</label>
-                <input type="text" placeholder="Ex: Ensino Médio Completo" className="w-full border rounded-lg p-2 text-sm outline-none focus:ring-1 focus:ring-primary-500" value={perfil.escolaridade || ""} onChange={e => setPerfil({...perfil, escolaridade: e.target.value})} />
+        ) : (
+          // Modo de Edição
+          <div className="px-5 py-8 animate-fadeIn">
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              const token = localStorage.getItem("token");
+              fetch('https://trampou-api.onrender.com' + "/candidatos/me", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                body: JSON.stringify({
+                  nome: perfil.nome,
+                  contato: perfil.contato,
+                  resumo_profissional: perfil.resumo_profissional,
+                  escolaridade: perfil.escolaridade,
+                  habilidades: perfil.habilidades
+                })
+              }).then(res => res.json())
+                .then(data => {
+                  alert("Perfil salvo com sucesso!");
+                  setIsEditing(false);
+                })
+                .catch(console.error);
+            }} className="space-y-4">
+              
+              <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm">
+                <h4 className="font-bold text-neutral-900 mb-3 flex items-center gap-2">
+                  <UserIcon className="w-5 h-5 text-[#f27918]" /> Dados Pessoais
+                </h4>
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-xs text-neutral-500 mb-1 font-medium">Nome Completo</label>
+                    <input type="text" className="w-full border border-neutral-200 rounded-lg p-3 text-sm outline-none focus:ring-1 focus:ring-[#f27918] transition-shadow" value={perfil.nome || ""} onChange={e => setPerfil({...perfil, nome: e.target.value})} />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-neutral-500 mb-1 font-medium">Contato (Telefone/WhatsApp)</label>
+                    <input type="text" className="w-full border border-neutral-200 rounded-lg p-3 text-sm outline-none focus:ring-1 focus:ring-[#f27918] transition-shadow" value={perfil.contato || ""} onChange={e => setPerfil({...perfil, contato: e.target.value})} />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <button type="submit" className="w-full bg-[#000000] text-white font-bold py-3 rounded-xl hover:bg-[#1f2937] transition-colors mt-2 mb-4 shadow-md">
-            Salvar Perfil
-          </button>
-        </form>
+              <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm">
+                <h4 className="font-bold text-neutral-900 mb-3 flex items-center gap-2">
+                  <BriefcaseIcon className="w-5 h-5 text-[#f27918]" /> Experiência & Habilidades
+                </h4>
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-xs text-neutral-500 mb-1 font-medium">Resumo Profissional / Experiência</label>
+                    <textarea rows="3" className="w-full border border-neutral-200 rounded-lg p-3 text-sm outline-none focus:ring-1 focus:ring-[#f27918] transition-shadow" value={perfil.resumo_profissional || ""} onChange={e => setPerfil({...perfil, resumo_profissional: e.target.value})} />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-neutral-500 mb-1 font-medium">Principais Habilidades (Separadas por vírgula)</label>
+                    <input type="text" placeholder="Ex: React, Vendas, Excel" className="w-full border border-neutral-200 rounded-lg p-3 text-sm outline-none focus:ring-1 focus:ring-[#f27918] transition-shadow" value={perfil.habilidades || ""} onChange={e => setPerfil({...perfil, habilidades: e.target.value})} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm">
+                <h4 className="font-bold text-neutral-900 mb-3 flex items-center gap-2">
+                  <AcademicCapIcon className="w-5 h-5 text-[#f27918]" /> Educação
+                </h4>
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-xs text-neutral-500 mb-1 font-medium">Escolaridade / Cursos</label>
+                    <input type="text" placeholder="Ex: Ensino Médio Completo" className="w-full border border-neutral-200 rounded-lg p-3 text-sm outline-none focus:ring-1 focus:ring-[#f27918] transition-shadow" value={perfil.escolaridade || ""} onChange={e => setPerfil({...perfil, escolaridade: e.target.value})} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button type="button" onClick={() => setIsEditing(false)} className="flex-1 border border-neutral-300 text-neutral-700 font-bold py-3.5 rounded-xl hover:bg-neutral-50 transition-colors shadow-sm">
+                  Cancelar
+                </button>
+                <button type="submit" className="flex-1 bg-[#3D251E] text-white font-bold py-3.5 rounded-xl hover:bg-neutral-800 transition-colors shadow-sm">
+                  Salvar Perfil
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </main>
 
       {/* Footer / Stats Fixos (Mockup Figura 11) */}
