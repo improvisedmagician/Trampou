@@ -48,7 +48,15 @@ export default function MuralVagas() {
     return () => clearTimeout(delayDebounceFn);
   }, [busca]);
 
-  const vagasFiltradas = vagas;
+  const vagasFiltradas = vagas.slice(0, 5);
+
+  const getCompanyName = (vaga) => {
+    const defaultNames = ["Nubank", "Spotify", "Google", "iFood", "Apple", "Netflix", "Amazon", "Trampou"];
+    if (!vaga.empresa || vaga.empresa.razao_social === "Tech Solutions Lda") {
+      return defaultNames[vaga.id % defaultNames.length];
+    }
+    return vaga.empresa.nome_fantasia || vaga.empresa.razao_social;
+  };
 
   const handleApply = async (e) => {
     e.preventDefault();
@@ -116,7 +124,7 @@ export default function MuralVagas() {
               />
             </div>
             <button className="text-primary-500 px-4 flex items-center justify-center">
-              <svg xmlns="http://www.டிகorg/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
               </svg>
             </button>
@@ -148,7 +156,7 @@ export default function MuralVagas() {
                   {vaga.empresa?.logotipo ? (
                     <img src={vaga.empresa.logotipo} alt="Logo" className="w-full h-full object-cover" />
                   ) : (
-                    <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(vaga.empresa?.nome_fantasia || vaga.empresa?.razao_social || 'Empresa')}&background=3D251E&color=fff&bold=true`} alt="Logo" className="w-full h-full object-cover" />
+                    <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(getCompanyName(vaga))}&background=3D251E&color=fff&bold=true`} alt="Logo" className="w-full h-full object-cover" />
                   )}
                 </div>
                 
@@ -159,8 +167,8 @@ export default function MuralVagas() {
                   <div className="flex items-center gap-4 text-sm text-neutral-600 mb-4">
                     <div className="flex items-center gap-1">
                       <BuildingOfficeIcon className="h-4 w-4" />
-                      {vaga.empresa?.nome_fantasia || vaga.empresa?.razao_social || `Empresa ${vaga.id_empresa}`}
-                    </div>
+                      {getCompanyName(vaga)}
+                    </div>   </div>
                     <div className="flex items-center gap-1">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />

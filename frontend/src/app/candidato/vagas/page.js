@@ -27,6 +27,14 @@ export default function TodasAsVagas() {
     return () => clearTimeout(delayDebounceFn);
   }, [busca]);
 
+  const getCompanyName = (vaga) => {
+    const defaultNames = ["Nubank", "Spotify", "Google", "iFood", "Apple", "Netflix", "Amazon", "Trampou"];
+    if (!vaga.empresa || vaga.empresa.razao_social === "Tech Solutions Lda") {
+      return defaultNames[vaga.id % defaultNames.length];
+    }
+    return vaga.empresa.nome_fantasia || vaga.empresa.razao_social;
+  };
+
   return (
     <div className="bg-[#fff8f6] font-sans min-h-screen flex flex-col p-5 pb-20">
       <header className="py-4 flex flex-col gap-4 mb-6">
@@ -62,7 +70,7 @@ export default function TodasAsVagas() {
                   {vaga.empresa?.logotipo ? (
                     <img src={vaga.empresa.logotipo} alt="Logo" className="w-full h-full object-cover" />
                   ) : (
-                    <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(vaga.empresa?.nome_fantasia || vaga.empresa?.razao_social || 'Empresa')}&background=3D251E&color=fff&bold=true`} alt="Logo" className="w-full h-full object-cover" />
+                    <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(getCompanyName(vaga))}&background=3D251E&color=fff&bold=true`} alt="Logo" className="w-full h-full object-cover" />
                   )}
                 </div>
                 
@@ -73,7 +81,7 @@ export default function TodasAsVagas() {
                   <div className="flex items-center gap-4 text-sm text-neutral-600 mb-4">
                     <div className="flex items-center gap-1">
                       <BuildingOfficeIcon className="h-4 w-4" />
-                      {vaga.empresa?.nome_fantasia || vaga.empresa?.razao_social || `Empresa ${vaga.id_empresa}`}
+                      {getCompanyName(vaga)}
                     </div>
                     <div className="flex items-center gap-1">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
