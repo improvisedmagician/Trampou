@@ -23,7 +23,11 @@ export default function Notificacoes() {
         })
           .then(res => res.json())
           .then(data => {
-            setNotificacoesCandidato(data);
+            if(Array.isArray(data)) {
+              setNotificacoesCandidato(data);
+            } else {
+              setNotificacoesCandidato([]);
+            }
             setLoading(false);
           })
           .catch(console.error);
