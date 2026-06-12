@@ -69,39 +69,41 @@ export default function VagasPage() {
 
   return (
     <div className="bg-[#fff8f6] font-sans min-h-screen flex flex-col p-5 pb-20">
-      <header className="py-4 flex flex-col gap-6 mb-2">
-        <h1 className="text-2xl font-bold text-neutral-900">Vagas</h1>
-        
-        {/* Tabs */}
-        <div className="flex bg-neutral-100 p-1 rounded-lg">
-          <button 
-            onClick={() => setActiveTab("todas")}
-            className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${activeTab === "todas" ? "bg-white text-primary-600 shadow-sm" : "text-neutral-500 hover:text-neutral-700"}`}
-          >
-            Explorar Vagas
-          </button>
-          <button 
-            onClick={() => setActiveTab("minhas")}
-            className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${activeTab === "minhas" ? "bg-white text-primary-600 shadow-sm" : "text-neutral-500 hover:text-neutral-700"}`}
-          >
-            Ver Candidaturas
-          </button>
-        </div>
-
-        {activeTab === "todas" && (
-          <div className="flex bg-white border border-primary-300 rounded-lg p-1 shadow-sm focus-within:ring-2 focus-within:ring-primary-500 transition-shadow">
-            <div className="flex-1 flex items-center pl-3">
-              <MagnifyingGlassIcon className="h-5 w-5 text-neutral-600" />
-              <input 
-                type="text" 
-                placeholder="Pesquisar vagas..." 
-                className="w-full py-2 px-3 text-neutral-900 bg-transparent outline-none placeholder:text-neutral-400 text-sm"
-                value={busca}
-                onChange={(e) => setBusca(e.target.value)}
-              />
-            </div>
+      <header className="py-4 w-full">
+        <div className="max-w-md mx-auto w-full flex flex-col gap-6 mb-2">
+          <h1 className="text-2xl font-bold text-neutral-900 text-center">Vagas</h1>
+          
+          {/* Tabs */}
+          <div className="flex bg-neutral-100 p-1 rounded-lg max-w-xs mx-auto w-full">
+            <button 
+              onClick={() => setActiveTab("todas")}
+              className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${activeTab === "todas" ? "bg-white text-primary-600 shadow-sm" : "text-neutral-500 hover:text-neutral-700"}`}
+            >
+              Explorar Vagas
+            </button>
+            <button 
+              onClick={() => setActiveTab("minhas")}
+              className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${activeTab === "minhas" ? "bg-white text-primary-600 shadow-sm" : "text-neutral-500 hover:text-neutral-700"}`}
+            >
+              Ver Candidaturas
+            </button>
           </div>
-        )}
+
+          {activeTab === "todas" && (
+            <div className="flex bg-white border border-primary-300 rounded-lg p-1 shadow-sm focus-within:ring-2 focus-within:ring-primary-500 transition-shadow">
+              <div className="flex-1 flex items-center pl-3">
+                <MagnifyingGlassIcon className="h-5 w-5 text-neutral-600" />
+                <input 
+                  type="text" 
+                  placeholder="Pesquisar vagas..." 
+                  className="w-full py-2 px-3 text-neutral-900 bg-transparent outline-none placeholder:text-neutral-400 text-sm"
+                  value={busca}
+                  onChange={(e) => setBusca(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </header>
 
       <main className="flex-1 max-w-md mx-auto w-full mt-4">
