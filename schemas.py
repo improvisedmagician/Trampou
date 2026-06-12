@@ -43,9 +43,11 @@ class CandidatoUpdate(BaseModel):
     contato: Optional[str] = None
     escolaridade: Optional[str] = None
     habilidades: Optional[str] = None
+    foto_perfil: Optional[str] = None
 
 class CandidatoOut(CandidatoBase):
     id: int
+    foto_perfil: Optional[str] = None
     class Config:
         from_attributes = True
 

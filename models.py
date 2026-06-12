@@ -31,6 +31,7 @@ class Candidato(Base):
     escolaridade = Column(String(200), nullable=True)
     habilidades = Column(Text, nullable=True)
     senha_hash = Column(String, nullable=False)
+    foto_perfil = Column(String(255), nullable=True)
 
     candidaturas = relationship("Candidatura", back_populates="candidato")
 

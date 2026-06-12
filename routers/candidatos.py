@@ -36,6 +36,36 @@ def update_candidato_me(candidato_update: schemas.CandidatoUpdate, db: Session =
     db.refresh(candidato_atual)
     return candidato_atual
 
+import os
+import shutil
+from fastapi import UploadFile, File
+
+@router.post("/me/foto", response_model=schemas.CandidatoOut)
+def upload_foto_perfil(
+    foto: UploadFile = File(...),
+    db: Session = Depends(database.get_db),
+    candidato_atual: models.Candidato = Depends(auth.get_current_candidato)
+):
+    if not foto.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="Apenas imagens são permitidas.")
+
+    # Guardar a imagem na pasta uploads
+    os.makedirs("uploads", exist_ok=True)
+    file_extension = foto.filename.split(".")[-1]
+    file_name = f"candidato_{candidato_atual.id}_foto.{file_extension}"
+    file_path = os.path.join("uploads", file_name)
+
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(foto.file, buffer)
+
+    # Atualizar o caminho no banco de dados
+    # O frontend vai precisar da URL absoluta ou relativa configurada (como o FastApi serve a pasta uploads)
+    candidato_atual.foto_perfil = f"https://trampou-api.onrender.com/uploads/{file_name}"
+    db.commit()
+    db.refresh(candidato_atual)
+    
+    return candidato_atual
+
 @router.get("/me")
 def read_candidato_me(db: Session = Depends(database.get_db), candidato_atual: models.Candidato = Depends(auth.get_current_candidato)):
     em_analise = db.query(models.Candidatura).filter(
@@ -61,6 +91,7 @@ def read_candidato_me(db: Session = Depends(database.get_db), candidato_atual: m
         "contato": candidato_atual.contato,
         "escolaridade": candidato_atual.escolaridade,
         "habilidades": candidato_atual.habilidades,
+        "foto_perfil": candidato_atual.foto_perfil,
         "stats": {
             "em_analise": em_analise,
             "entrevista": entrevista,
