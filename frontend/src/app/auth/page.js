@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { EyeIcon, EyeSlashIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 
 export default function AuthPage() {
@@ -98,7 +98,13 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="flex-1 flex flex-col p-5 bg-primary-50 font-sans antialiased min-h-screen">
+    <div className="flex-1 flex flex-col p-5 bg-primary-50 font-sans antialiased min-h-screen relative">
+      <header className="absolute top-4 left-4 z-10">
+        <button onClick={() => router.push("/")} className="text-neutral-900 hover:bg-white/50 p-2 rounded-full transition-colors flex items-center justify-center">
+          <ArrowLeftIcon className="w-6 h-6" />
+        </button>
+      </header>
+
       <div className="flex-1 flex flex-col justify-center w-full max-w-md mx-auto pt-12 pb-8">
         
         <div className="mb-6 text-center">
