@@ -179,7 +179,9 @@ export default function MuralVagas() {
                   </div>
                 </div>
                 <div className="mt-2 pt-4 border-t border-dashed border-neutral-200 flex justify-between items-center">
-                  <span className="font-bold text-primary-500 text-sm">R$ {vaga.salario || 'A combinar'}</span>
+                  <span className="font-bold text-primary-500 text-sm">
+                    {vaga.salario ? (isNaN(parseFloat(vaga.salario.replace(',','.'))) ? vaga.salario : parseFloat(vaga.salario.replace(',','.')).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})) : '-'}
+                  </span>
                   <a 
                     href={`/candidatar/${vaga.id}`}
                     className="px-5 py-2 bg-primary-300 text-neutral-900 font-bold rounded-lg hover:bg-primary-500 transition-colors text-sm"
