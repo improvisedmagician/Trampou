@@ -42,83 +42,66 @@ export default function CandidatoPerfil() {
   }
 
   return (
-    <div className="bg-[#fcfcfc] text-neutral-900 font-sans min-h-screen flex flex-col relative pb-24">
+    <div className="bg-[#fcfcfc] text-neutral-900 font-sans min-h-screen flex flex-col relative pb-28">
       {/* Header Fixo */}
       <header className="flex items-center justify-between px-5 py-4 bg-white border-b border-neutral-100 sticky top-0 z-10">
-        <Link href="/" className="p-2 -ml-2 text-neutral-900 hover:bg-neutral-100 rounded-full transition-colors">
+        <Link href="/" className="p-2 -ml-2 text-[#f27918] hover:bg-neutral-100 rounded-full transition-colors">
           <ArrowLeftIcon className="w-6 h-6" />
         </Link>
-        <h1 className="text-xl font-bold text-neutral-900">{isEditing ? "Editar Perfil" : "Meu Perfil"}</h1>
-        <div className="w-8 h-8"></div> {/* Espaçador */}
+        <h1 className="text-lg font-bold text-neutral-900">{isEditing ? "Editar Perfil" : "Meu Perfil Digital"}</h1>
+        <div className="w-8 h-8 rounded-full overflow-hidden border border-neutral-200">
+          <img alt="Mini Avatar" className="w-full h-full object-cover" src={`https://ui-avatars.com/api/?name=${perfil?.nome}&background=1f2937&color=fff`} />
+        </div>
       </header>
 
       <main className="flex-1 w-full max-w-md mx-auto flex flex-col">
         {!isEditing ? (
-          // Visualização do Perfil (Tela 5 do PDF)
-          <div className="flex flex-col animate-fadeIn">
-            {/* Bloco de cor no topo com Avatar sobreposto */}
-            <div className="bg-[#3D251E] h-32 relative flex justify-center rounded-b-[30px] shadow-sm">
-              <div className="absolute -bottom-16 w-32 h-32 rounded-full border-4 border-white bg-white overflow-hidden shadow-md">
-                <img alt="Avatar" className="w-full h-full object-cover" src={`https://ui-avatars.com/api/?name=${perfil?.nome}&background=f27918&color=fff&size=256`} />
+          // Visualização do Perfil (Figura 11 Tela 3)
+          <div className="flex flex-col animate-fadeIn px-5">
+            
+            {/* Avatar Central Arredondado */}
+            <div className="flex flex-col items-center mt-10 mb-8">
+              <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-[#f27918] shadow-sm mb-4">
+                <img alt="Avatar" className="w-full h-full object-cover" src={`https://ui-avatars.com/api/?name=${perfil?.nome}&background=1f2937&color=fff&size=256`} />
               </div>
+              <h2 className="text-xl font-bold text-neutral-900">{perfil?.nome}</h2>
+              <p className="text-neutral-500 text-sm mt-1">{perfil?.resumo_profissional ? perfil.resumo_profissional.substring(0, 40) + "..." : "Candidato na Trampou"}</p>
             </div>
 
-            <div className="mt-20 px-6 text-center">
-              <h2 className="text-2xl font-bold text-neutral-900 mb-1">{perfil?.nome}</h2>
-              <p className="text-[#f27918] font-semibold text-sm mb-5">Candidato na Trampou</p>
-              
-              <button onClick={() => setIsEditing(true)} className="border-2 border-neutral-200 text-neutral-800 font-bold px-8 py-2.5 rounded-full hover:bg-neutral-50 transition-colors shadow-sm text-sm">
-                Editar Perfil
-              </button>
-            </div>
-
-            <div className="px-6 mt-10 space-y-8">
-              <section>
-                <h3 className="text-lg font-bold text-neutral-900 mb-3 flex items-center gap-2">
-                  <UserIcon className="w-5 h-5 text-[#f27918]" /> Sobre Mim
-                </h3>
-                <p className="text-neutral-600 text-sm leading-relaxed bg-white p-4 rounded-2xl border border-neutral-100 shadow-sm">
-                  {perfil?.resumo_profissional || 'Nenhum resumo profissional adicionado. Edite o perfil para contar um pouco sobre si.'}
-                </p>
-              </section>
-
-              <section>
-                <h3 className="text-lg font-bold text-neutral-900 mb-3 flex items-center gap-2">
-                  <BriefcaseIcon className="w-5 h-5 text-[#f27918]" /> Habilidades
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {perfil?.habilidades ? perfil.habilidades.split(',').map((hab, i) => (
-                    <span key={i} className="bg-primary-50 text-[#f27918] border border-primary-100 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide">
-                      {hab.trim()}
-                    </span>
-                  )) : (
-                    <span className="text-neutral-500 text-sm">Nenhuma habilidade listada.</span>
-                  )}
-                </div>
-              </section>
-
-              <section>
-                <h3 className="text-lg font-bold text-neutral-900 mb-3 flex items-center gap-2">
-                  <AcademicCapIcon className="w-5 h-5 text-[#f27918]" /> Formação
-                </h3>
-                <div className="bg-white p-4 rounded-2xl border border-neutral-100 shadow-sm flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center flex-shrink-0">
-                    <AcademicCapIcon className="w-5 h-5 text-neutral-400" />
-                  </div>
+            {/* Cartões de Navegação */}
+            <div className="space-y-4">
+              <div onClick={() => setIsEditing(true)} className="bg-white border border-neutral-200 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:border-[#f27918] transition-colors shadow-sm">
+                <div className="flex items-center gap-4">
+                  <UserIcon className="w-6 h-6 text-[#785b16]" />
                   <div>
-                    <h4 className="font-bold text-neutral-900 text-sm">{perfil?.escolaridade || 'Não informada'}</h4>
+                    <h3 className="font-bold text-neutral-900 text-base">Dados Pessoais</h3>
+                    <p className="text-xs text-neutral-500 mt-0.5">Informações de contato e endereço</p>
                   </div>
                 </div>
-              </section>
+                <div className="text-neutral-400 font-bold text-xl">&gt;</div>
+              </div>
 
-              <section>
-                <h3 className="text-lg font-bold text-neutral-900 mb-3 flex items-center gap-2">
-                  <ClipboardDocumentListIcon className="w-5 h-5 text-[#f27918]" /> Contato
-                </h3>
-                <div className="bg-white p-4 rounded-2xl border border-neutral-100 shadow-sm">
-                  <p className="text-neutral-600 text-sm">{perfil?.contato || 'Nenhum contato adicionado'}</p>
+              <div onClick={() => setIsEditing(true)} className="bg-white border border-neutral-200 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:border-[#f27918] transition-colors shadow-sm">
+                <div className="flex items-center gap-4">
+                  <BriefcaseIcon className="w-6 h-6 text-[#785b16]" />
+                  <div>
+                    <h3 className="font-bold text-neutral-900 text-base">Experiência</h3>
+                    <p className="text-xs text-neutral-500 mt-0.5">Histórico profissional e cargos</p>
+                  </div>
                 </div>
-              </section>
+                <div className="text-neutral-400 font-bold text-xl">&gt;</div>
+              </div>
+
+              <div onClick={() => setIsEditing(true)} className="bg-white border border-neutral-200 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:border-[#f27918] transition-colors shadow-sm">
+                <div className="flex items-center gap-4">
+                  <AcademicCapIcon className="w-6 h-6 text-[#785b16]" />
+                  <div>
+                    <h3 className="font-bold text-neutral-900 text-base">Educação</h3>
+                    <p className="text-xs text-neutral-500 mt-0.5">Formação acadêmica e cursos</p>
+                  </div>
+                </div>
+                <div className="text-neutral-400 font-bold text-xl">&gt;</div>
+              </div>
             </div>
           </div>
         ) : (
