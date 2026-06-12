@@ -13,7 +13,7 @@ export default function BottomNav() {
   }, [pathname]); // Re-check role on navigation
 
   // Define which paths should show the bottom nav
-  const showOnPaths = ["/", "/empresa/dashboard", "/notificacoes", "/candidato/perfil", "/candidato/vagas"];
+  const showOnPaths = ["/", "/empresa/dashboard", "/notificacoes", "/candidato/vagas"];
   if (!showOnPaths.includes(pathname)) return null;
 
   const isActive = (path) => pathname === path;

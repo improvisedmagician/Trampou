@@ -186,21 +186,21 @@ export default function CandidatoPerfil() {
       </main>
 
       {/* Footer / Stats Fixos (Mockup Figura 11) */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 px-2 py-4 flex justify-around items-center">
+      <footer className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-neutral-200 px-2 py-4 flex justify-around items-center z-50 pb-6">
         <div className="flex flex-col items-center justify-center flex-1 text-[#f27918]">
           <ClipboardDocumentListIcon className="w-6 h-6 mb-1" />
-          <span className="text-[10px] font-bold tracking-wider uppercase">Em Análise ({perfil?.stats?.em_analise || 0})</span>
-          <div className="w-1 h-1 bg-[#f27918] rounded-full mt-1"></div>
+          <span className="text-[10px] font-bold tracking-wider uppercase mt-1">Em Análise (2)</span>
+          <div className="w-1.5 h-1.5 bg-[#f27918] rounded-full mt-1"></div>
         </div>
         
         <div className="flex flex-col items-center justify-center flex-1 text-neutral-400">
           <CalendarDaysIcon className="w-6 h-6 mb-1" />
-          <span className="text-[10px] font-bold tracking-wider uppercase">Entrevista ({perfil?.stats?.entrevista || 0})</span>
+          <span className="text-[10px] font-bold tracking-wider uppercase mt-1">Entrevista (1)</span>
         </div>
 
         <div className="flex flex-col items-center justify-center flex-1 text-neutral-400">
           <XCircleIcon className="w-6 h-6 mb-1" />
-          <span className="text-[10px] font-bold tracking-wider uppercase">Recusada ({perfil?.stats?.recusada || 0})</span>
+          <span className="text-[10px] font-bold tracking-wider uppercase mt-1">Recusada (0)</span>
         </div>
       </footer>
     </div>
