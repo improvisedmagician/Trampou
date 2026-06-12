@@ -43,7 +43,7 @@ export default function AuthPage() {
     if(tab === "login") {
       const loginEndpoint = perfil === "empresa" ? "/auth/login/empresa" : "/auth/login/candidato";
       const loginPayload = perfil === "empresa" ? {
-        cnpj: formData.doc,
+        cnpj: formData.doc.replace(/\D/g, ""),
         senha: formData.senha
       } : {
         email: formData.email,
@@ -84,11 +84,11 @@ export default function AuthPage() {
     
     const payload = perfil === "empresa" ? {
       razao_social: formData.nome,
-      cnpj: formData.doc,
+      cnpj: formData.doc.replace(/\D/g, ""),
       senha: formData.senha
     } : {
       nome: formData.nome,
-      cpf: formData.doc,
+      cpf: formData.doc.replace(/\D/g, ""),
       email: formData.email,
       senha: formData.senha
     };
