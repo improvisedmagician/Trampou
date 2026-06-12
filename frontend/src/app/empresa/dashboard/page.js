@@ -17,7 +17,7 @@ export default function EmpresaDashboard() {
       window.location.href = "/auth";
       return;
     }
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')}/vagas/empresa/${userId}`, {
+    fetch(`${'https://trampou-api.onrender.com'}/vagas/empresa/${userId}`, {
       headers: { "Authorization": `Bearer ${token}` }
     })
       .then(res => {
@@ -37,7 +37,7 @@ export default function EmpresaDashboard() {
     const newStatus = vaga.status === "Ativa" ? "Pausada" : "Ativa";
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')}/vagas/${vaga.id}/status`, {
+      const response = await fetch(`${'https://trampou-api.onrender.com'}/vagas/${vaga.id}/status`, {
         method: "PATCH",
         headers: { 
           "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export default function EmpresaDashboard() {
     setLoadingCandidatos(true);
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')}/candidaturas/vaga/${vaga.id}`, {
+      const response = await fetch(`${'https://trampou-api.onrender.com'}/candidaturas/vaga/${vaga.id}`, {
         headers: { "Authorization": `Bearer ${token}` }
       });
       if(response.ok) {
@@ -201,7 +201,7 @@ export default function EmpresaDashboard() {
               ) : (
                 <div className="flex flex-col gap-4">
                   {candidatos.map((c, index) => {
-                    const pdfUrl = `${process.env.NEXT_PUBLIC_API_URL || (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')}/${c.caminho_curriculo_pdf.replace(/\\/g, '/')}`;
+                    const pdfUrl = `${'https://trampou-api.onrender.com'}/${c.caminho_curriculo_pdf.replace(/\\/g, '/')}`;
                     return (
                       <div key={index} className="bg-neutral-50 p-4 rounded-lg border border-neutral-200 flex justify-between items-center">
                         <div>

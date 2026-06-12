@@ -28,7 +28,7 @@ export default function PublicarVaga() {
         router.push("/auth");
         return;
       }
-      const response = await fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/vagas/", {
+      const response = await fetch('https://trampou-api.onrender.com' + "/vagas/", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",

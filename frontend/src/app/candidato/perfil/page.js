@@ -16,7 +16,7 @@ export default function CandidatoPerfil() {
       return;
     }
 
-    fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/candidatos/me", {
+    fetch('https://trampou-api.onrender.com' + "/candidatos/me", {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -65,7 +65,7 @@ export default function CandidatoPerfil() {
         <form onSubmit={(e) => {
           e.preventDefault();
           const token = localStorage.getItem("token");
-          fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/candidatos/me", {
+          fetch('https://trampou-api.onrender.com' + "/candidatos/me", {
             method: "PUT",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             body: JSON.stringify({

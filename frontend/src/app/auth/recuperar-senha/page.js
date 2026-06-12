@@ -12,7 +12,7 @@ export default function RecuperarSenha() {
   const handleRecuperar = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/auth/recuperar-senha", {
+      const res = await fetch('https://trampou-api.onrender.com' + "/auth/recuperar-senha", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -20,7 +20,7 @@ export default function PerfilEmpresa() {
         return;
       }
       try {
-        const res = await fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/empresas/me", {
+        const res = await fetch('https://trampou-api.onrender.com' + "/empresas/me", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (res.ok) {
@@ -44,7 +44,7 @@ export default function PerfilEmpresa() {
     e.preventDefault();
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/empresas/me", {
+      const res = await fetch('https://trampou-api.onrender.com' + "/empresas/me", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -35,7 +35,7 @@ export default function AuthPage() {
       };
 
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')}${loginEndpoint}`, {
+        const response = await fetch(`${'https://trampou-api.onrender.com'}${loginEndpoint}`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(loginPayload)
@@ -78,7 +78,7 @@ export default function AuthPage() {
     };
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')}${endpoint}`, {
+      const response = await fetch(`${'https://trampou-api.onrender.com'}${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)

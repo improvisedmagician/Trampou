@@ -18,7 +18,7 @@ export default function Notificacoes() {
     } else {
       setRole(storedRole);
       if (storedRole === "candidato") {
-        fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/notificacoes/me", {
+        fetch('https://trampou-api.onrender.com' + "/notificacoes/me", {
           headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
         })
           .then(res => res.json())
@@ -36,7 +36,7 @@ export default function Notificacoes() {
   const markAsRead = async (id) => {
     if (role !== "candidato") return;
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')}/notificacoes/${id}/lida`, {
+      await fetch(`${'https://trampou-api.onrender.com'}/notificacoes/${id}/lida`, {
         method: "PUT",
         headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
       });

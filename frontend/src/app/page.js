@@ -19,7 +19,7 @@ export default function MuralVagas() {
     // Create an async function to debounce or fetch
     const delayDebounceFn = setTimeout(() => {
       setLoading(true);
-      const url = busca ? `${process.env.NEXT_PUBLIC_API_URL || (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')}/vagas/?q=${encodeURIComponent(busca)}` : ((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/vagas/";
+      const url = busca ? `${'https://trampou-api.onrender.com'}/vagas/?q=${encodeURIComponent(busca)}` : 'https://trampou-api.onrender.com' + "/vagas/";
       fetch(url)
         .then(res => res.json())
         .then(data => {
@@ -30,7 +30,7 @@ export default function MuralVagas() {
           console.error("Erro ao buscar vagas", err);
           // Send error to our new debug endpoint
           try {
-            fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/debug/logs", {
+            fetch('https://trampou-api.onrender.com' + "/debug/logs", {
               method: "POST",
               headers: {"Content-Type": "application/json"},
               body: JSON.stringify({
@@ -67,7 +67,7 @@ export default function MuralVagas() {
     formData.append("curriculo", file);
 
     try {
-      const response = await fetch(((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000')) + "/candidaturas/", {
+      const response = await fetch('https://trampou-api.onrender.com' + "/candidaturas/", {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` },
         body: formData
