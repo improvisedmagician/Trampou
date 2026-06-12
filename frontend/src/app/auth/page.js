@@ -144,6 +144,7 @@ export default function AuthPage() {
         </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            {/* Campo NOME (Apenas no cadastro) */}
             {tab === "cadastro" && (
               <div>
                 <label htmlFor="nome" className="block text-sm font-medium text-neutral-900 mb-1">
@@ -153,7 +154,8 @@ export default function AuthPage() {
               </div>
             )}
 
-            {tab === "cadastro" && (
+            {/* Campo DOC (CPF ou CNPJ) - Aparece no Cadastro para ambos, mas no Login só para Empresa */}
+            {(tab === "cadastro" || (tab === "login" && perfil === "empresa")) && (
               <div>
                 <label htmlFor="doc" className="block text-sm font-medium text-neutral-900 mb-1">
                   {perfil === "empresa" ? "CNPJ" : "CPF"}
@@ -162,10 +164,13 @@ export default function AuthPage() {
               </div>
             )}
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-neutral-900 mb-1">E-mail</label>
-              <input id="email" value={formData.email} onChange={handleChange} required type="email" className="w-full bg-white border border-neutral-300 rounded-lg px-4 py-3 text-neutral-900 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" />
-            </div>
+            {/* Campo EMAIL - Aparece no Cadastro para ambos, mas no Login só para Candidato */}
+            {(tab === "cadastro" || (tab === "login" && perfil === "candidato")) && (
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-neutral-900 mb-1">E-mail</label>
+                <input id="email" value={formData.email} onChange={handleChange} required type="email" className="w-full bg-white border border-neutral-300 rounded-lg px-4 py-3 text-neutral-900 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" />
+              </div>
+            )}
 
             <div className="relative mb-2">
               <label htmlFor="senha" className="block text-sm font-medium text-neutral-900 mb-1">Senha</label>
