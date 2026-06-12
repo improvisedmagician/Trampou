@@ -50,40 +50,7 @@ export default function Notificacoes() {
     }
   };
 
-  const notificacoesEmpresa = [
-    {
-      id: 1,
-      icon: <BellIcon className="w-6 h-6 text-primary-500" />,
-      titulo: "Nova Candidatura",
-      descricao: "Você recebeu uma nova candidatura para a vaga de Senior UI Designer...",
-      tempo: "há 5 min",
-      lida: false
-    },
-    {
-      id: 2,
-      icon: <EnvelopeIcon className="w-6 h-6 text-primary-500" />,
-      titulo: "Convite para Entrevista",
-      descricao: "A empresa TechCorp agendou uma entrevista com você para amanhã...",
-      tempo: "há 2 horas",
-      lida: false
-    },
-    {
-      id: 3,
-      icon: <BriefcaseIcon className="w-6 h-6 text-primary-500" />,
-      titulo: "Nova Vaga Compatível",
-      descricao: "Uma nova vaga de Diretor de Arte foi publicada na sua área de interesse.",
-      tempo: "ontem",
-      lida: true
-    },
-    {
-      id: 4,
-      icon: <UserPlusIcon className="w-6 h-6 text-primary-500" />,
-      titulo: "Nova Conexão",
-      descricao: "Maria Fernandes aceitou seu pedido de conexão na rede Trampou.",
-      tempo: "há 2 dias",
-      lida: true
-    }
-  ];
+  const notificacoesEmpresa = [];
 
   if (!role) return null;
 

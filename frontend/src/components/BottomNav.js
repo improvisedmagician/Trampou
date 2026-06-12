@@ -41,7 +41,7 @@ export default function BottomNav() {
         <span className="text-[10px] font-semibold uppercase tracking-wider">Notificações</span>
       </Link>
       
-      <Link href="/candidato/perfil" className={`flex flex-col items-center gap-1 ${isActive("/candidato/perfil") ? "text-[#f27918]" : "text-neutral-400 hover:text-[#f27918]"}`}>
+      <Link href={role === "empresa" ? "/empresa/perfil" : "/candidato/perfil"} className={`flex flex-col items-center gap-1 ${isActive("/candidato/perfil") || isActive("/empresa/perfil") ? "text-[#f27918]" : "text-neutral-400 hover:text-[#f27918]"}`}>
         <UserIcon className="w-6 h-6" />
         <span className="text-[10px] font-semibold uppercase tracking-wider">Perfil</span>
       </Link>
