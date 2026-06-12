@@ -11,6 +11,21 @@ os.makedirs("uploads", exist_ok=True)
 # Cria as tabelas no banco de dados automaticamente no arranque (SQLite)
 Base.metadata.create_all(bind=engine)
 
+from sqlalchemy import text
+try:
+    with engine.connect() as conn:
+        conn.execute(text("ALTER TABLE tb_candidatos ADD COLUMN foto_perfil VARCHAR(255)"))
+        conn.commit()
+except Exception:
+    pass
+
+try:
+    with engine.connect() as conn:
+        conn.execute(text("ALTER TABLE tb_empresas ADD COLUMN logotipo VARCHAR(255)"))
+        conn.commit()
+except Exception:
+    pass
+
 app = FastAPI(title="Trampou API", description="API para plataforma de recrutamento e seleção Trampou")
 
 from fastapi.middleware.cors import CORSMiddleware
