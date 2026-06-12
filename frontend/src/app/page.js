@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { MagnifyingGlassIcon, BriefcaseIcon, BuildingOfficeIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function MuralVagas() {
@@ -126,9 +127,9 @@ export default function MuralVagas() {
       <section className="max-w-md mx-auto px-4 py-8 w-full flex-1">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-neutral-900">Vagas em Destaque</h2>
-          <button className="text-xs font-bold tracking-widest text-neutral-900 hover:underline uppercase">
+          <Link href="/candidato/vagas" className="text-xs font-bold tracking-widest text-neutral-900 hover:underline uppercase">
             VER TODAS
-          </button>
+          </Link>
         </div>
 
         {loading ? (
