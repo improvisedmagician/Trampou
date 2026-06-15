@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ArrowLeftIcon, UserIcon, BriefcaseIcon, AcademicCapIcon, ClipboardDocumentListIcon, CalendarDaysIcon, XCircleIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, UserIcon, BriefcaseIcon, AcademicCapIcon, ClipboardDocumentListIcon, CalendarDaysIcon, XCircleIcon, ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -133,6 +133,21 @@ export default function CandidatoPerfil() {
                   </div>
                 </div>
                 <div className="text-neutral-400 font-bold text-xl">&gt;</div>
+              </div>
+
+              {/* Botão Sair */}
+              <div className="pt-4">
+                <button 
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("role");
+                    router.push("/auth");
+                  }} 
+                  className="w-full bg-red-50 text-red-600 font-bold py-4 rounded-xl border border-red-100 hover:bg-red-100 transition-colors flex items-center justify-center gap-2 shadow-sm"
+                >
+                  <ArrowLeftOnRectangleIcon className="w-5 h-5" />
+                  Sair da Conta
+                </button>
               </div>
             </div>
           </div>

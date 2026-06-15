@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 
 export default function PerfilEmpresa() {
   const router = useRouter();
@@ -160,6 +160,20 @@ export default function PerfilEmpresa() {
             className="w-full py-4 bg-[#000000] text-white rounded-xl font-bold text-lg hover:bg-[#1f2937] transition-colors shadow-md active:scale-[0.98]"
           >
             Salvar Alterações
+          </button>
+
+          {/* Botão Sair */}
+          <button 
+            type="button"
+            onClick={() => {
+              localStorage.removeItem("token");
+              localStorage.removeItem("role");
+              router.push("/auth");
+            }} 
+            className="w-full bg-red-50 text-red-600 font-bold py-4 rounded-xl border border-red-100 hover:bg-red-100 transition-colors flex items-center justify-center gap-2 shadow-sm mt-4"
+          >
+            <ArrowLeftOnRectangleIcon className="w-5 h-5" />
+            Sair da Conta
           </button>
         </form>
       </main>
