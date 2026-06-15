@@ -23,7 +23,7 @@ export default function BottomNav() {
   const isVagasActive = isActive("/empresa/dashboard") || isActive("/candidato/vagas");
   
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 py-3 px-6 flex justify-between items-center max-w-md mx-auto shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50">
+    <div className="fixed bottom-0 md:bottom-6 left-0 right-0 bg-white border-t md:border border-neutral-200 py-3 px-6 flex justify-between items-center max-w-md md:max-w-lg mx-auto shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] md:shadow-xl z-50 md:rounded-full transition-all">
       <Link href="/" className={`flex flex-col items-center gap-1 ${isActive("/") ? "text-[#f27918]" : "text-neutral-400 hover:text-[#f27918]"}`}>
         <HomeIcon className="w-6 h-6" />
         <span className="text-[10px] font-semibold uppercase tracking-wider">Início</span>

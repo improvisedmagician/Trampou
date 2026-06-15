@@ -79,7 +79,7 @@ export default function EmpresaDashboard() {
 
   return (
     <div className="bg-neutral-50 text-neutral-900 font-sans min-h-screen pt-4 pb-20 relative">
-      <main className="px-5 max-w-md mx-auto w-full">
+      <main className="px-5 max-w-md md:max-w-5xl lg:max-w-7xl mx-auto w-full">
         
         {/* Header Dashboard */}
         <header className="flex items-center justify-between mb-8 pb-4 border-b border-neutral-200">
@@ -106,7 +106,7 @@ export default function EmpresaDashboard() {
         </Link>
 
         {/* Cartões de Métricas */}
-        <div className="flex flex-col gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           <div className="bg-white border border-neutral-100 rounded-xl p-6 shadow-sm relative">
             <BriefcaseIcon className="w-6 h-6 text-primary-500 absolute top-6 right-6" />
             <p className="text-xs tracking-widest text-neutral-600 font-bold uppercase mb-4">Vagas Ativas</p>

@@ -101,7 +101,7 @@ export default function PerfilEmpresa() {
         <h1 className="text-xl font-bold text-[#000000] flex-1 text-center pr-10">Editar Perfil</h1>
       </header>
       
-      <main className="p-6">
+      <main className="p-6 max-w-md mx-auto w-full">
         <form onSubmit={handleSubmit} className="space-y-4">
           
           {/* Avatar / Logotipo */}

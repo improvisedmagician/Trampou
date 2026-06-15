@@ -69,8 +69,8 @@ export default function VagasPage() {
 
   return (
     <div className="bg-[#fff8f6] font-sans min-h-screen flex flex-col p-5 pb-20">
-      <header className="py-4 w-full">
-        <div className="max-w-md mx-auto w-full flex flex-col gap-6 mb-2">
+      <header className="bg-white pt-8 pb-4 px-4 shadow-sm relative z-10">
+        <div className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto w-full flex flex-col gap-6 mb-2">
           <h1 className="text-2xl font-bold text-neutral-900 text-center">Vagas</h1>
           
           {/* Tabs */}
@@ -106,7 +106,7 @@ export default function VagasPage() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-md mx-auto w-full mt-4">
+      <main className="flex-1 max-w-md md:max-w-3xl lg:max-w-5xl mx-auto w-full mt-4">
         {loading ? (
           <div className="flex justify-center py-10"><p className="text-neutral-600">A carregar...</p></div>
         ) : activeTab === "todas" ? (
@@ -116,7 +116,7 @@ export default function VagasPage() {
                <p className="text-neutral-600 font-medium">Nenhuma vaga encontrada para "{busca}".</p>
             </div>
           ) : (
-            <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {vagas.map(vaga => (
                 <div key={vaga.id} className="bg-white rounded-xl p-5 border border-neutral-200 hover:shadow-md transition-all flex flex-col relative">
                   <div className="w-12 h-12 bg-[#3D251E] rounded-md mb-4 flex items-center justify-center text-white overflow-hidden shadow-sm">
@@ -174,7 +174,7 @@ export default function VagasPage() {
                </button>
             </div>
           ) : (
-            <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {minhasCandidaturas.map(cand => (
                 <div key={cand.id} className="bg-white rounded-xl p-5 border border-neutral-200 hover:shadow-md transition-all flex flex-col relative">
                   <div className="flex justify-between items-start mb-2">

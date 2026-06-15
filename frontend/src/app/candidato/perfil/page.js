@@ -82,13 +82,13 @@ export default function CandidatoPerfil() {
         </div>
       </header>
 
-      <main className="flex-1 w-full max-w-md mx-auto flex flex-col">
+      <main className="flex-1 w-full max-w-md md:max-w-3xl lg:max-w-5xl mx-auto flex flex-col">
         {!isEditing ? (
           // Visualização do Perfil (Figura 11 Tela 3)
-          <div className="flex flex-col animate-fadeIn px-5">
+          <div className="flex flex-col md:flex-row md:items-start md:gap-8 animate-fadeIn px-5">
             
             {/* Avatar Central Arredondado */}
-            <div className="flex flex-col items-center mt-10 mb-8 relative">
+            <div className="flex flex-col items-center mt-10 mb-8 md:mb-0 md:w-1/3 relative bg-white p-6 rounded-2xl shadow-sm border border-neutral-100">
               <label className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-[#f27918] shadow-sm mb-4 cursor-pointer relative group block">
                 <img alt="Avatar" className="w-full h-full object-cover" src={perfil?.foto_perfil || `https://ui-avatars.com/api/?name=${perfil?.nome}&background=1f2937&color=fff&size=256`} />
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -97,11 +97,11 @@ export default function CandidatoPerfil() {
                 <input type="file" className="hidden" accept="image/*" onChange={handleFotoChange} />
               </label>
               <h2 className="text-xl font-bold text-neutral-900">{perfil?.nome}</h2>
-              <p className="text-neutral-500 text-sm mt-1">{perfil?.resumo_profissional ? perfil.resumo_profissional.substring(0, 40) + "..." : "Candidato na Trampou"}</p>
+              <p className="text-neutral-500 text-sm mt-1 text-center">{perfil?.resumo_profissional ? perfil.resumo_profissional.substring(0, 80) + "..." : "Candidato na Trampou"}</p>
             </div>
 
             {/* Cartões de Navegação */}
-            <div className="space-y-4">
+            <div className="space-y-4 md:w-2/3 md:mt-10">
               <div onClick={() => setIsEditing(true)} className="bg-white border border-neutral-200 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:border-[#f27918] transition-colors shadow-sm">
                 <div className="flex items-center gap-4">
                   <UserIcon className="w-6 h-6 text-[#785b16]" />
@@ -138,7 +138,7 @@ export default function CandidatoPerfil() {
           </div>
         ) : (
           // Modo de Edição
-          <div className="px-5 py-8 animate-fadeIn">
+          <div className="px-5 py-8 animate-fadeIn max-w-md mx-auto w-full">
             <form onSubmit={(e) => {
               e.preventDefault();
               const token = localStorage.getItem("token");
@@ -218,7 +218,7 @@ export default function CandidatoPerfil() {
       </main>
 
       {/* Footer / Stats Fixos (Mockup Figura 11) */}
-      <footer className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-neutral-200 px-2 py-4 flex justify-around items-center z-50 pb-6">
+      <footer className="fixed bottom-0 left-0 right-0 max-w-md md:max-w-3xl lg:max-w-5xl mx-auto bg-white border-t border-neutral-200 px-2 py-4 flex justify-around items-center z-50 pb-6">
         <div className="flex flex-col items-center justify-center flex-1 text-[#f27918]">
           <ClipboardDocumentListIcon className="w-6 h-6 mb-1" />
           <span className="text-[10px] font-bold tracking-wider uppercase mt-1">Em Análise ({perfil?.stats?.em_analise || 0})</span>

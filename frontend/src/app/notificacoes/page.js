@@ -65,7 +65,7 @@ export default function Notificacoes() {
         <h1 className="text-xl font-bold text-neutral-900 flex-1 text-center pr-10">Notificações</h1>
       </header>
 
-      <main className="flex-1 max-w-md mx-auto w-full bg-white shadow-sm min-h-screen">
+      <main className="flex-1 max-w-md md:max-w-3xl lg:max-w-5xl mx-auto w-full bg-white shadow-sm min-h-screen">
         {loading ? (
           <div className="p-5 text-center text-neutral-500">A carregar notificações...</div>
         ) : (

@@ -100,7 +100,7 @@ export default function MuralVagas() {
   return (
     <div className="flex-1 bg-[#fff8f6] flex flex-col relative pb-20">
       <section className="pt-12 pb-8 px-5">
-        <div className="max-w-md mx-auto text-left">
+        <div className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto text-left">
           <div className="flex items-center gap-2 mb-8 text-neutral-900">
             <BriefcaseIcon className="w-6 h-6" />
             <span className="text-xl font-bold">Trampou</span>
@@ -132,7 +132,7 @@ export default function MuralVagas() {
         </div>
       </section>
 
-      <section className="max-w-md mx-auto px-4 py-8 w-full flex-1">
+      <section className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto px-4 py-8 w-full flex-1">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-neutral-900">Vagas em Destaque</h2>
           <Link href="/candidato/vagas" className="text-xs font-bold tracking-widest text-neutral-900 hover:underline uppercase">
@@ -143,7 +143,7 @@ export default function MuralVagas() {
         {loading ? (
           <div className="flex justify-center py-10"><p className="text-neutral-600">A carregar vagas...</p></div>
         ) : (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {vagasFiltradas.map(vaga => (
               <div key={vaga.id} className="bg-white rounded-xl p-5 border border-neutral-200 hover:shadow-md transition-all flex flex-col relative">
                 <button className="absolute top-5 right-5 text-neutral-400 hover:text-primary-500">
