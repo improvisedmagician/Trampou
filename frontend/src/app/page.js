@@ -13,6 +13,7 @@ export default function MuralVagas() {
   const [file, setFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userRole, setUserRole] = useState(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
     setUserRole(localStorage.getItem("role"));
@@ -182,18 +183,54 @@ export default function MuralVagas() {
                   <span className="font-bold text-primary-500 text-sm">
                     {vaga.salario ? (isNaN(parseFloat(vaga.salario.replace(',','.'))) ? vaga.salario : parseFloat(vaga.salario.replace(',','.')).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})) : '-'}
                   </span>
-                  <a 
-                    href={`/candidatar/${vaga.id}`}
+                  <button 
+                    onClick={() => {
+                      if (!userRole) {
+                         setShowLoginModal(true);
+                      } else {
+                         window.location.href = `/candidatar/${vaga.id}`;
+                      }
+                    }}
                     className="px-5 py-2 bg-primary-300 text-neutral-900 font-bold rounded-lg hover:bg-primary-500 transition-colors text-sm"
                   >
                     Candidatar-se
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         )}
       </section>
+
+      {/* Login Required Modal */}
+      {showLoginModal && (
+        <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full text-center shadow-xl relative animate-fadeIn">
+            <button 
+              onClick={() => setShowLoginModal(false)}
+              className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600"
+            >
+              <XMarkIcon className="w-6 h-6" />
+            </button>
+            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <BriefcaseIcon className="w-8 h-8 text-primary-600" />
+            </div>
+            <h3 className="text-xl font-bold text-neutral-900 mb-2">Acesso Restrito</h3>
+            <p className="text-neutral-600 mb-6">Para se candidatar a esta vaga, é necessário estar logado na plataforma.</p>
+            <div className="flex flex-col gap-3">
+              <Link href="/auth" className="w-full py-3 bg-[#3D251E] text-white font-bold rounded-xl hover:bg-neutral-800 transition-colors">
+                Fazer Login ou Registar
+              </Link>
+              <button 
+                onClick={() => setShowLoginModal(false)}
+                className="w-full py-3 bg-neutral-100 text-neutral-700 font-bold rounded-xl hover:bg-neutral-200 transition-colors"
+              >
+                Continuar a Explorar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
