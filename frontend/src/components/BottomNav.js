@@ -7,9 +7,29 @@ import { useEffect, useState } from "react";
 export default function BottomNav() {
   const pathname = usePathname();
   const [role, setRole] = useState(null);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
-    setRole(localStorage.getItem("role"));
+    const currentRole = localStorage.getItem("role");
+    setRole(currentRole);
+    
+    if (currentRole === "candidato") {
+      const token = localStorage.getItem("token");
+      if (token) {
+        fetch('https://trampou-api.onrender.com/notificacoes/unread_count', {
+          headers: { "Authorization": `Bearer ${token}` }
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.unread_count !== undefined) {
+            setUnreadCount(data.unread_count);
+          }
+        })
+        .catch(err => console.error("Error fetching unread count", err));
+      }
+    } else {
+      setUnreadCount(0); // Empresa não tem notificações ainda
+    }
   }, [pathname]); // Re-check role on navigation
 
   // Define which paths should show the bottom nav
@@ -36,8 +56,9 @@ export default function BottomNav() {
       
       <Link href="/notificacoes" className={`flex flex-col items-center gap-1 relative ${isActive("/notificacoes") ? "text-[#f27918]" : "text-neutral-400 hover:text-[#f27918]"}`}>
         <BellIcon className="w-6 h-6" />
-        {/* Fake unread dot */}
-        <div className="absolute top-0 right-1 w-2 h-2 bg-[#f27918] rounded-full border border-white"></div>
+        {unreadCount > 0 && (
+          <div className="absolute top-0 right-1 w-2 h-2 bg-[#f27918] rounded-full border border-white"></div>
+        )}
         <span className="text-[10px] font-semibold uppercase tracking-wider">Notificações</span>
       </Link>
       

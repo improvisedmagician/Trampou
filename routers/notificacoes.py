@@ -11,6 +11,14 @@ def listar_notificacoes(db: Session = Depends(database.get_db), current_candidat
         models.Notificacao.fk_candidato == current_candidato.id
     ).order_by(models.Notificacao.data_criacao.desc()).all()
 
+@router.get("/unread_count")
+def unread_count(db: Session = Depends(database.get_db), current_candidato: models.Candidato = Depends(auth.get_current_candidato)):
+    count = db.query(models.Notificacao).filter(
+        models.Notificacao.fk_candidato == current_candidato.id,
+        models.Notificacao.lida == False
+    ).count()
+    return {"unread_count": count}
+
 @router.put("/{id}/lida")
 def marcar_como_lida(id: int, db: Session = Depends(database.get_db), current_candidato: models.Candidato = Depends(auth.get_current_candidato)):
     notificacao = db.query(models.Notificacao).filter(models.Notificacao.id == id).first()

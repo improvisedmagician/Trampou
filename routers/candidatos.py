@@ -17,6 +17,16 @@ def create_candidato(candidato: schemas.CandidatoCreate, db: Session = Depends(d
     db.add(db_candidato)
     db.commit()
     db.refresh(db_candidato)
+    
+    # Criar Notificação de Boas-vindas
+    welcome_notificacao = models.Notificacao(
+        fk_candidato=db_candidato.id,
+        mensagem="Bem-vindo(a) à plataforma Trampou, onde você vai encontrar o seu novo tempo!",
+        lida=False
+    )
+    db.add(welcome_notificacao)
+    db.commit()
+
     return db_candidato
 
 @router.put("/me", response_model=schemas.CandidatoOut)
