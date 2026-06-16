@@ -116,79 +116,75 @@ export default function AuthPage() {
   return (
     <div className="flex-1 flex flex-col p-5 bg-primary-50 font-sans antialiased min-h-screen relative">
       <header className="absolute top-4 left-4 z-10">
-        <button onClick={() => router.push("/")} className="text-neutral-900 hover:bg-white/50 p-2 rounded-full transition-colors flex items-center justify-center">
+        <button onClick={() => router.push("/")} className="text-primary-700 p-2 transition-colors flex items-center justify-center">
           <ArrowLeftIcon className="w-6 h-6" />
         </button>
       </header>
 
-      <div className="flex-1 flex flex-col justify-center w-full max-w-md mx-auto pt-12 pb-8">
+      <div className="flex-1 flex flex-col justify-center w-full max-w-sm mx-auto pt-12 pb-8">
         
-        <div className="mb-6 text-center">
-          <h1 className="text-4xl font-bold text-neutral-900 tracking-tight">Trampou</h1>
+        <div className="mb-10 text-center mt-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary-700 tracking-tight">Trampou</h1>
         </div>
 
         {error && (
-          <div className="bg-red-50 text-red-600 border border-red-200 p-4 rounded-lg mb-6 text-sm font-medium">
+          <div className="bg-red-50 text-red-600 border border-red-200 p-4 mb-6 text-sm font-medium">
             {error}
           </div>
         )}
 
-        <div className="flex border-b border-neutral-300 mb-6">
-          <button onClick={() => setTab("login")} className={`flex-1 pb-3 text-base font-semibold text-center border-b-2 transition-colors ${tab === "login" ? "border-neutral-900 text-neutral-900" : "border-transparent text-neutral-600 hover:text-neutral-900"}`}>Login</button>
-          <button onClick={() => setTab("cadastro")} className={`flex-1 pb-3 text-base font-semibold text-center border-b-2 transition-colors ${tab === "cadastro" ? "border-neutral-900 text-neutral-900" : "border-transparent text-neutral-600 hover:text-neutral-900"}`}>Cadastro</button>
+        <div className="flex border-b border-neutral-300 mb-8">
+          <button onClick={() => setTab("login")} className={`flex-1 pb-3 text-lg transition-colors ${tab === "login" ? "border-b-2 border-primary-700 text-primary-700 font-semibold" : "border-b-2 border-transparent text-primary-700 hover:border-neutral-400"}`}>Login</button>
+          <button onClick={() => setTab("cadastro")} className={`flex-1 pb-3 text-lg transition-colors ${tab === "cadastro" ? "border-b-2 border-primary-700 text-primary-700 font-semibold" : "border-b-2 border-transparent text-primary-700 hover:border-neutral-400"}`}>Cadastro</button>
         </div>
 
-        <div className="flex mb-8 rounded-md overflow-hidden">
-          <button onClick={() => setPerfil("candidato")} className={`flex-1 py-3 font-semibold text-sm transition-colors ${perfil === "candidato" ? "bg-neutral-900 text-white" : "bg-[#f5e6e3] text-neutral-600 hover:bg-[#ebd5d0]"}`}>Sou Candidato</button>
-          <button onClick={() => setPerfil("empresa")} className={`flex-1 py-3 font-semibold text-sm transition-colors ${perfil === "empresa" ? "bg-neutral-900 text-white" : "bg-[#f5e6e3] text-neutral-600 hover:bg-[#ebd5d0]"}`}>Sou Empresa</button>
+        <div className="flex mb-8 bg-primary-100 p-0">
+          <button onClick={() => setPerfil("candidato")} className={`flex-1 py-3.5 font-medium transition-colors ${perfil === "candidato" ? "bg-primary-700 text-white" : "text-primary-700 hover:bg-primary-200"}`}>Sou Candidato</button>
+          <button onClick={() => setPerfil("empresa")} className={`flex-1 py-3.5 font-medium transition-colors ${perfil === "empresa" ? "bg-primary-700 text-white" : "text-primary-700 hover:bg-primary-200"}`}>Sou Empresa</button>
         </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {/* Campo NOME (Apenas no cadastro) */}
             {tab === "cadastro" && (
               <div>
-                <label htmlFor="nome" className="block text-sm font-medium text-neutral-900 mb-1">
-                  {perfil === "empresa" ? "Razão Social" : "Nome Completo"}
-                </label>
-                <input id="nome" value={formData.nome} onChange={handleChange} required type="text" className="w-full bg-neutral-50 border border-neutral-300 rounded-lg px-4 py-2.5 text-neutral-900 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" />
+                <input id="nome" value={formData.nome} onChange={handleChange} required type="text" placeholder={perfil === "empresa" ? "Razão Social" : "Nome Completo"} className="w-full bg-white border border-primary-500 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors" />
               </div>
             )}
 
             {/* Campo DOC (CPF ou CNPJ) - Aparece no Cadastro para ambos, mas no Login só para Empresa */}
             {(tab === "cadastro" || (tab === "login" && perfil === "empresa")) && (
               <div>
-                <label htmlFor="doc" className="block text-sm font-medium text-neutral-900 mb-1">
-                  {perfil === "empresa" ? "CNPJ" : "CPF"}
-                </label>
-                <input id="doc" value={formData.doc} onChange={handleChange} required type="text" className="w-full bg-neutral-50 border border-neutral-300 rounded-lg px-4 py-2.5 text-neutral-900 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" />
+                <input id="doc" value={formData.doc} onChange={handleChange} required type="text" placeholder={perfil === "empresa" ? "CNPJ" : "CPF"} className="w-full bg-white border border-primary-500 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors" />
               </div>
             )}
 
             {/* Campo EMAIL - Aparece no Cadastro para ambos, mas no Login só para Candidato */}
             {(tab === "cadastro" || (tab === "login" && perfil === "candidato")) && (
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-neutral-900 mb-1">E-mail</label>
-                <input id="email" value={formData.email} onChange={handleChange} required type="email" className="w-full bg-white border border-neutral-300 rounded-lg px-4 py-3 text-neutral-900 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" />
+                <input id="email" value={formData.email} onChange={handleChange} required type="email" placeholder="E-mail" className="w-full bg-white border border-primary-500 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors" />
               </div>
             )}
 
             <div className="relative mb-2">
-              <label htmlFor="senha" className="block text-sm font-medium text-neutral-900 mb-1">Senha</label>
-              <input id="senha" value={formData.senha} onChange={handleChange} required type={showPassword ? "text" : "password"} className="w-full bg-white border border-neutral-300 rounded-lg px-4 py-3 pr-12 text-neutral-900 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-[38px] text-neutral-600 hover:text-neutral-900">
+              <input id="senha" value={formData.senha} onChange={handleChange} required type={showPassword ? "text" : "password"} placeholder="Senha" className="w-full bg-white border border-primary-500 px-4 py-4 pr-12 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors" />
+              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-[18px] text-primary-700 hover:text-primary-800">
                 {showPassword ? <EyeSlashIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
               </button>
             </div>
             
-            <div className="flex justify-end pt-1">
-              <a href="/auth/recuperar-senha" className="text-sm font-medium text-[#000000] hover:underline cursor-pointer">
-                Esqueci a senha
-              </a>
-            </div>
+            {tab === "login" && (
+              <div className="flex justify-end pt-1">
+                <a href="/auth/recuperar-senha" className="text-sm font-medium text-primary-700 hover:underline cursor-pointer">
+                  Esqueci a senha
+                </a>
+              </div>
+            )}
 
-            <button type="submit" className="w-full bg-neutral-900 text-white font-semibold py-4 rounded-lg hover:bg-neutral-800 transition-colors">
-              {tab === "login" ? "Entrar" : "Cadastrar"}
-            </button>
+            <div className="mt-8 mb-4">
+              <button type="submit" className="w-full bg-primary-700 text-white font-medium py-4 hover:bg-primary-800 transition-colors">
+                {tab === "login" ? "Entrar" : "Cadastrar"}
+              </button>
+            </div>
           </form>
       </div>
     </div>
