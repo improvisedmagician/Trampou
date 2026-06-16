@@ -138,35 +138,35 @@ export default function AuthPage() {
           <button onClick={() => setTab("cadastro")} className={`flex-1 pb-3 text-lg transition-colors ${tab === "cadastro" ? "border-b-2 border-primary-700 text-primary-700 font-semibold" : "border-b-2 border-transparent text-primary-700 hover:border-neutral-400"}`}>Cadastro</button>
         </div>
 
-        <div className="flex mb-8 bg-primary-100 p-0">
-          <button onClick={() => setPerfil("candidato")} className={`flex-1 py-3.5 font-medium transition-colors ${perfil === "candidato" ? "bg-primary-700 text-white" : "text-primary-700 hover:bg-primary-200"}`}>Sou Candidato</button>
-          <button onClick={() => setPerfil("empresa")} className={`flex-1 py-3.5 font-medium transition-colors ${perfil === "empresa" ? "bg-primary-700 text-white" : "text-primary-700 hover:bg-primary-200"}`}>Sou Empresa</button>
+        <div className="flex mb-8 bg-primary-100 p-1 rounded-md">
+          <button onClick={() => setPerfil("candidato")} className={`flex-1 py-3 font-medium transition-colors rounded ${perfil === "candidato" ? "bg-primary-700 text-white" : "text-primary-700 hover:bg-primary-200"}`}>Sou Candidato</button>
+          <button onClick={() => setPerfil("empresa")} className={`flex-1 py-3 font-medium transition-colors rounded ${perfil === "empresa" ? "bg-primary-700 text-white" : "text-primary-700 hover:bg-primary-200"}`}>Sou Empresa</button>
         </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {/* Campo NOME (Apenas no cadastro) */}
             {tab === "cadastro" && (
               <div>
-                <input id="nome" value={formData.nome} onChange={handleChange} required type="text" placeholder={perfil === "empresa" ? "Razão Social" : "Nome Completo"} className="w-full bg-white border border-primary-500 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors" />
+                <input id="nome" value={formData.nome} onChange={handleChange} required type="text" placeholder={perfil === "empresa" ? "Razão Social" : "Nome Completo"} className="w-full bg-white border border-primary-500 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors rounded-sm" />
               </div>
             )}
 
             {/* Campo DOC (CPF ou CNPJ) - Aparece no Cadastro para ambos, mas no Login só para Empresa */}
             {(tab === "cadastro" || (tab === "login" && perfil === "empresa")) && (
               <div>
-                <input id="doc" value={formData.doc} onChange={handleChange} required type="text" placeholder={perfil === "empresa" ? "CNPJ" : "CPF"} className="w-full bg-white border border-primary-500 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors" />
+                <input id="doc" value={formData.doc} onChange={handleChange} required type="text" placeholder={perfil === "empresa" ? "CNPJ" : "CPF"} className="w-full bg-white border border-primary-500 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors rounded-sm" />
               </div>
             )}
 
             {/* Campo EMAIL - Aparece no Cadastro para ambos, mas no Login só para Candidato */}
             {(tab === "cadastro" || (tab === "login" && perfil === "candidato")) && (
               <div>
-                <input id="email" value={formData.email} onChange={handleChange} required type="email" placeholder="E-mail" className="w-full bg-white border border-primary-500 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors" />
+                <input id="email" value={formData.email} onChange={handleChange} required type="email" placeholder="E-mail" className="w-full bg-white border border-primary-500 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors rounded-sm" />
               </div>
             )}
 
             <div className="relative mb-2">
-              <input id="senha" value={formData.senha} onChange={handleChange} required type={showPassword ? "text" : "password"} placeholder="Senha" className="w-full bg-white border border-primary-500 px-4 py-4 pr-12 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors" />
+              <input id="senha" value={formData.senha} onChange={handleChange} required type={showPassword ? "text" : "password"} placeholder="Senha" className="w-full bg-white border border-primary-500 px-4 py-4 pr-12 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-colors rounded-sm" />
               <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-[18px] text-primary-700 hover:text-primary-800">
                 {showPassword ? <EyeSlashIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
               </button>
@@ -180,8 +180,8 @@ export default function AuthPage() {
               </div>
             )}
 
-            <div className="mt-8 mb-4">
-              <button type="submit" className="w-full bg-primary-700 text-white font-medium py-4 hover:bg-primary-800 transition-colors">
+            <div className="mt-16 mb-4">
+              <button type="submit" className="w-full bg-primary-700 text-white font-medium py-4 rounded-md hover:bg-primary-800 transition-colors">
                 {tab === "login" ? "Entrar" : "Cadastrar"}
               </button>
             </div>
