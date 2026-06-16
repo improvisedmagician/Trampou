@@ -73,3 +73,14 @@ class Notificacao(Base):
     data_criacao = Column(DateTime, default=datetime.utcnow)
 
     candidato = relationship("Candidato")
+
+class NotificacaoEmpresa(Base):
+    __tablename__ = "notificacoes_empresas"
+
+    id = Column(Integer, primary_key=True, index=True)
+    fk_empresa = Column(Integer, ForeignKey("tb_empresas.id"), nullable=False)
+    mensagem = Column(String(500), nullable=False)
+    lida = Column(Boolean, default=False)
+    data_criacao = Column(DateTime, default=datetime.utcnow)
+
+    empresa = relationship("Empresa")

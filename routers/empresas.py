@@ -14,6 +14,15 @@ def create_empresa(empresa: schemas.EmpresaCreate, db: Session = Depends(databas
     db.add(db_empresa)
     db.commit()
     db.refresh(db_empresa)
+
+    # Criar Notificação de Boas-vindas para Empresa
+    welcome_notificacao = models.NotificacaoEmpresa(
+        fk_empresa=db_empresa.id,
+        mensagem="Bem-vinda à plataforma Trampou! Já pode começar a publicar vagas e a recrutar os melhores talentos.",
+        lida=False
+    )
+    db.add(welcome_notificacao)
+    db.commit()
     
     from logger import log_action
     log_action("Auth", f"Nova empresa registada: {empresa.cnpj}")

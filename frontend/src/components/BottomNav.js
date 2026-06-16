@@ -13,10 +13,12 @@ export default function BottomNav() {
     const currentRole = localStorage.getItem("role");
     setRole(currentRole);
     
-    if (currentRole === "candidato") {
+    if (currentRole) {
       const token = localStorage.getItem("token");
       if (token) {
-        fetch('https://trampou-api.onrender.com/notificacoes/unread_count', {
+        const url = currentRole === 'empresa' ? 'https://trampou-api.onrender.com/notificacoes/empresa/unread_count' : 'https://trampou-api.onrender.com/notificacoes/unread_count';
+        
+        fetch(url, {
           headers: { "Authorization": `Bearer ${token}` }
         })
         .then(res => res.json())
@@ -28,7 +30,7 @@ export default function BottomNav() {
         .catch(err => console.error("Error fetching unread count", err));
       }
     } else {
-      setUnreadCount(0); // Empresa não tem notificações ainda
+      setUnreadCount(0);
     }
   }, [pathname]); // Re-check role on navigation
 
