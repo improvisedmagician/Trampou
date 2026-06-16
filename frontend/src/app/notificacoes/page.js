@@ -74,14 +74,14 @@ export default function Notificacoes() {
         <button onClick={() => router.back()} className="mr-4 text-primary-700 p-2">
           <ArrowLeftIcon className="w-6 h-6" />
         </button>
-        <h1 className="text-xl font-bold text-primary-700 flex-1 pr-10">Notificações</h1>
+        <h1 className="text-xl font-bold text-primary-700 flex-1 pr-10 text-center">Notificações</h1>
       </header>
 
-      <main className="flex-1 w-full min-h-screen">
+      <main className="flex-1 w-full min-h-screen flex flex-col items-center">
         {loading ? (
-          <div className="p-5 text-center text-neutral-500">A carregar notificações...</div>
+          <div className="p-5 text-center text-neutral-500 w-full">A carregar notificações...</div>
         ) : (
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full max-w-2xl mx-auto">
             {notificacoes.map((notif, index) => {
               // Parse message to get icon and title
               const msg = notif.mensagem.toLowerCase();
