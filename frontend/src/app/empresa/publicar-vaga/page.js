@@ -57,7 +57,7 @@ export default function PublicarVaga() {
         <h1 className="text-xl font-bold text-primary-700 flex-1 text-center pr-10">Publicar Vaga</h1>
       </header>
 
-      <main className="flex-1 w-full flex flex-col pt-6">
+      <main className="flex-1 w-full max-w-2xl mx-auto flex flex-col pt-6">
         {error && (
           <div className="bg-red-50 text-red-600 border border-red-200 p-4 mx-5 mb-6 text-sm font-medium">
             {error}
