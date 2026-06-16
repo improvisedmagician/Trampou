@@ -70,7 +70,7 @@ export default function CandidatoPerfil() {
   }
 
   return (
-    <div className="bg-[#fcfcfc] text-neutral-900 font-sans min-h-screen flex flex-col relative pb-28">
+    <div className="bg-red-50 text-neutral-900 font-sans min-h-screen flex flex-col relative pb-28">
       {/* Header Fixo */}
       <header className="flex items-center justify-between px-5 py-4 bg-white border-b border-neutral-100 sticky top-0 z-10">
         <Link href="/" className="p-2 -ml-2 text-[#f27918] hover:bg-neutral-100 rounded-full transition-colors">
