@@ -128,7 +128,7 @@ export default function Notificacoes() {
                 <div 
                   key={notif.id} 
                   onClick={() => !notif.lida ? markAsRead(notif.id) : null}
-                  className={`flex items-start gap-4 p-5 cursor-pointer transition-colors ${notif.lida ? 'opacity-60' : 'hover:bg-primary-100'} ${index !== notificacoes.length - 1 ? "border-b border-neutral-200" : ""}`}
+                  className={`flex items-start gap-4 p-5 cursor-pointer transition-colors hover:bg-primary-100 ${index !== notificacoes.length - 1 ? "border-b border-neutral-200" : ""}`}
                 >
                   <div className="pt-1 flex-shrink-0">
                     <Icon className="w-6 h-6 text-primary-500" />
