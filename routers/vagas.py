@@ -17,6 +17,10 @@ def create_vaga(vaga: schemas.VagaCreate, db: Session = Depends(database.get_db)
     db.add(db_vaga)
     db.commit()
     db.refresh(db_vaga)
+
+    from logger import log_action
+    log_action("Vagas", f"Empresa ID {current_empresa.id} publicou a vaga: {vaga.titulo}")
+
     return db_vaga
 
 @router.get("/", response_model=List[schemas.VagaOut])
@@ -49,4 +53,8 @@ def alterar_status_vaga(id: int, status_update: schemas.VagaStatusUpdate, db: Se
     db_vaga.status = status_update.status
     db.commit()
     db.refresh(db_vaga)
+
+    from logger import log_action
+    log_action("Vagas", f"Empresa ID {current_empresa.id} alterou status da vaga ID {id} para {status_update.status}")
+
     return db_vaga

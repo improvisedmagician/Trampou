@@ -27,6 +27,9 @@ def create_candidato(candidato: schemas.CandidatoCreate, db: Session = Depends(d
     db.add(welcome_notificacao)
     db.commit()
 
+    from logger import log_action
+    log_action("Auth", f"Novo candidato registado: {candidato.email}")
+
     return db_candidato
 
 @router.put("/me", response_model=schemas.CandidatoOut)
@@ -44,6 +47,10 @@ def update_candidato_me(candidato_update: schemas.CandidatoUpdate, db: Session =
 
     db.commit()
     db.refresh(candidato_atual)
+
+    from logger import log_action
+    log_action("Perfil", f"Candidato ID {candidato_atual.id} atualizou o perfil")
+
     return candidato_atual
 
 import os

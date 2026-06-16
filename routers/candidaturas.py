@@ -30,6 +30,10 @@ def create_candidatura(
     db.add(db_candidatura)
     db.commit()
     db.refresh(db_candidatura)
+
+    from logger import log_action
+    log_action("Candidaturas", f"Candidato ID {current_candidato.id} enviou currículo para a Vaga ID {fk_vaga}")
+
     return db_candidatura
 
 from typing import List
@@ -64,4 +68,8 @@ def alterar_status_candidatura(id: int, status_update: schemas.CandidaturaStatus
     
     db.commit()
     db.refresh(db_candidatura)
+
+    from logger import log_action
+    log_action("Candidaturas", f"Empresa ID {current_empresa.id} alterou status da candidatura ID {id} para {status_update.status}")
+
     return db_candidatura

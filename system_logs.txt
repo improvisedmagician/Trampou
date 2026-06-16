@@ -1,0 +1,2 @@
+[2026-06-15T23:50:00.000000] [Sistema] Backend Trampou iniciado com sucesso | Details: OK
+[2026-06-15T23:51:00.000000] [Banco de Dados] Conexão estabelecida e sincronizada | Details: SQLAlchemy Engine Active

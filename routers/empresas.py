@@ -14,6 +14,10 @@ def create_empresa(empresa: schemas.EmpresaCreate, db: Session = Depends(databas
     db.add(db_empresa)
     db.commit()
     db.refresh(db_empresa)
+    
+    from logger import log_action
+    log_action("Auth", f"Nova empresa registada: {empresa.cnpj}")
+
     return db_empresa
 
 @router.get("/me", response_model=schemas.EmpresaOut)
@@ -34,6 +38,10 @@ def update_empresa_me(empresa_update: schemas.EmpresaUpdate, db: Session = Depen
 
     db.commit()
     db.refresh(empresa_atual)
+
+    from logger import log_action
+    log_action("Perfil", f"Empresa ID {empresa_atual.id} atualizou o perfil")
+
     return empresa_atual
 
 import os
