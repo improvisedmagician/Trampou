@@ -99,32 +99,44 @@ export default function MuralVagas() {
   };
 
   return (
-    <div className="flex-1 bg-[#fff8f6] flex flex-col relative pb-20">
-      <section className="pt-12 pb-8 px-5">
+    <div className="flex-1 bg-primary-50 flex flex-col relative pb-20">
+      <section className="pt-8 pb-8 px-5">
         <div className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto text-left">
-          <div className="flex items-center gap-2 mb-8 text-neutral-900">
-            <BriefcaseIcon className="w-6 h-6" />
-            <span className="text-xl font-bold">Trampou</span>
+          
+          {/* Header Row */}
+          <div className="flex items-center justify-between mb-10 text-primary-700">
+            <div className="flex items-center gap-2">
+              <BriefcaseIcon className="w-6 h-6" />
+              <span className="text-xl font-bold">Trampou</span>
+            </div>
+            <button onClick={() => router.push('/notificacoes')} className="relative">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+              </svg>
+            </button>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight mb-4 text-[#3D251E] leading-tight">
+
+          {/* Hero Titles */}
+          <h1 className="text-4xl font-bold tracking-tight mb-4 text-primary-700 leading-tight">
             Encontre o seu <br/> próximo legado.
           </h1>
           <p className="text-base text-neutral-600 mb-8 max-w-sm">
             Oportunidades exclusivas para profissionais de elite.
           </p>
           
-          <div className="flex bg-white border border-primary-300 rounded-lg p-1 shadow-sm focus-within:ring-2 focus-within:ring-primary-500 transition-shadow">
+          {/* Search Bar */}
+          <div className="flex bg-white border border-primary-500 rounded-sm p-1 focus-within:ring-1 focus-within:ring-primary-500 transition-shadow">
             <div className="flex-1 flex items-center pl-3">
               <MagnifyingGlassIcon className="h-5 w-5 text-neutral-600" />
               <input 
                 type="text" 
                 placeholder="Cargo, empresa ou palavra-chave" 
-                className="w-full py-3 px-3 text-neutral-900 bg-transparent outline-none placeholder:text-neutral-400 text-sm"
+                className="w-full py-4 px-3 text-neutral-900 bg-transparent outline-none placeholder:text-neutral-500 text-sm"
                 value={busca}
                 onChange={(e) => setBusca(e.target.value)}
               />
             </div>
-            <button className="text-primary-500 px-4 flex items-center justify-center">
+            <button className="text-primary-500 px-4 flex items-center justify-center border-l border-neutral-100">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
               </svg>
@@ -135,8 +147,8 @@ export default function MuralVagas() {
 
       <section className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto px-4 py-8 w-full flex-1">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-neutral-900">Vagas em Destaque</h2>
-          <Link href="/candidato/vagas" className="text-xs font-bold tracking-widest text-neutral-900 hover:underline uppercase">
+          <h2 className="text-2xl font-bold text-primary-700">Vagas em Destaque</h2>
+          <Link href="/candidato/vagas" className="text-xs font-bold tracking-widest text-primary-700 hover:underline uppercase underline-offset-4 decoration-primary-700/30">
             VER TODAS
           </Link>
         </div>
@@ -146,26 +158,26 @@ export default function MuralVagas() {
         ) : (
           <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {vagasFiltradas.map(vaga => (
-              <div key={vaga.id} className="bg-white rounded-xl p-5 border border-neutral-200 hover:shadow-md transition-all flex flex-col relative">
-                <button className="absolute top-5 right-5 text-neutral-400 hover:text-primary-500">
+              <div key={vaga.id} className="bg-white rounded-none p-5 border border-neutral-200 hover:border-primary-300 transition-colors flex flex-col relative">
+                <button className="absolute top-5 right-5 text-neutral-400 hover:text-primary-700">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
                   </svg>
                 </button>
                 
-                <div className="w-12 h-12 bg-[#3D251E] rounded-md mb-4 flex items-center justify-center text-white overflow-hidden shadow-sm">
+                <div className="w-14 h-14 bg-primary-700 rounded-none border border-neutral-100 mb-4 flex items-center justify-center text-white overflow-hidden p-1">
                   {vaga.empresa?.logotipo ? (
-                    <img src={vaga.empresa.logotipo} alt="Logo" className="w-full h-full object-cover" />
+                    <img src={vaga.empresa.logotipo} alt="Logo" className="w-full h-full object-cover rounded-none" />
                   ) : (
-                    <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(getCompanyName(vaga))}&background=3D251E&color=fff&bold=true`} alt="Logo" className="w-full h-full object-cover" />
+                    <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(getCompanyName(vaga))}&background=4a362f&color=fff&bold=true`} alt="Logo" className="w-full h-full object-cover rounded-none" />
                   )}
                 </div>
                 
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-neutral-900 mb-1">
+                  <h3 className="text-2xl font-bold text-primary-700 mb-2">
                     {vaga.titulo}
                   </h3>
-                  <div className="flex items-center gap-4 text-sm text-neutral-600 mb-4">
+                  <div className="flex items-center gap-4 text-sm text-neutral-600 mb-6 font-medium">
                     <div className="flex items-center gap-1">
                       <BuildingOfficeIcon className="h-4 w-4" />
                       {getCompanyName(vaga)}
@@ -179,8 +191,8 @@ export default function MuralVagas() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-2 pt-4 border-t border-dashed border-neutral-200 flex justify-between items-center">
-                  <span className="font-bold text-primary-500 text-sm">
+                <div className="pt-5 border-t border-solid border-neutral-100 flex justify-between items-center">
+                  <span className="font-semibold text-primary-700 text-sm tracking-tight">
                     {vaga.salario ? (isNaN(parseFloat(vaga.salario.replace(',','.'))) ? vaga.salario : parseFloat(vaga.salario.replace(',','.')).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})) : '-'}
                   </span>
                   <button 
@@ -191,7 +203,7 @@ export default function MuralVagas() {
                          window.location.href = `/candidatar/${vaga.id}`;
                       }
                     }}
-                    className="px-5 py-2 bg-primary-300 text-neutral-900 font-bold rounded-lg hover:bg-primary-500 transition-colors text-sm"
+                    className="px-6 py-2.5 bg-primary-500 text-primary-900 font-medium rounded-lg hover:bg-primary-400 transition-colors text-sm shadow-sm"
                   >
                     Candidatar-se
                   </button>
@@ -205,25 +217,25 @@ export default function MuralVagas() {
       {/* Login Required Modal */}
       {showLoginModal && (
         <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-sm w-full text-center shadow-xl relative animate-fadeIn">
+          <div className="bg-white rounded-none p-6 max-w-sm w-full text-center shadow-xl relative animate-fadeIn border border-primary-500">
             <button 
               onClick={() => setShowLoginModal(false)}
               className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600"
             >
               <XMarkIcon className="w-6 h-6" />
             </button>
-            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <BriefcaseIcon className="w-8 h-8 text-primary-600" />
+            <div className="w-16 h-16 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-primary-200">
+              <BriefcaseIcon className="w-8 h-8 text-primary-700" />
             </div>
-            <h3 className="text-xl font-bold text-neutral-900 mb-2">Acesso Restrito</h3>
+            <h3 className="text-xl font-bold text-primary-700 mb-2">Acesso Restrito</h3>
             <p className="text-neutral-600 mb-6">Para se candidatar a esta vaga, é necessário estar logado na plataforma.</p>
             <div className="flex flex-col gap-3">
-              <Link href="/auth" className="w-full py-3 bg-[#3D251E] text-white font-bold rounded-xl hover:bg-neutral-800 transition-colors">
+              <Link href="/auth" className="w-full py-3 bg-primary-700 text-white font-medium rounded-none hover:bg-primary-800 transition-colors">
                 Fazer Login ou Registar
               </Link>
               <button 
                 onClick={() => setShowLoginModal(false)}
-                className="w-full py-3 bg-neutral-100 text-neutral-700 font-bold rounded-xl hover:bg-neutral-200 transition-colors"
+                className="w-full py-3 bg-white border border-primary-700 text-primary-700 font-medium rounded-none hover:bg-primary-50 transition-colors"
               >
                 Continuar a Explorar
               </button>
