@@ -9,6 +9,7 @@ export default function Notificacoes() {
   const [role, setRole] = useState(null);
 
   const [notificacoesCandidato, setNotificacoesCandidato] = useState([]);
+  const [notificacoesEmpresa, setNotificacoesEmpresa] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,40 +18,51 @@ export default function Notificacoes() {
       router.push("/auth");
     } else {
       setRole(storedRole);
-      if (storedRole === "candidato") {
-        fetch('https://trampou-api.onrender.com' + "/notificacoes/me", {
-          headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
-        })
-          .then(res => res.json())
-          .then(data => {
-            if(Array.isArray(data)) {
-              setNotificacoesCandidato(data);
+      const url = storedRole === "empresa" 
+        ? 'https://trampou-api.onrender.com/notificacoes/empresa/me'
+        : 'https://trampou-api.onrender.com/notificacoes/me';
+
+      fetch(url, {
+        headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if(Array.isArray(data)) {
+            if (storedRole === "empresa") {
+              setNotificacoesEmpresa(data);
             } else {
-              setNotificacoesCandidato([]);
+              setNotificacoesCandidato(data);
             }
-            setLoading(false);
-          })
-          .catch(console.error);
-      } else {
-        setLoading(false);
-      }
+          } else {
+            setNotificacoesEmpresa([]);
+            setNotificacoesCandidato([]);
+          }
+          setLoading(false);
+        })
+        .catch(console.error);
     }
   }, [router]);
 
   const markAsRead = async (id) => {
-    if (role !== "candidato") return;
     try {
-      await fetch(`${'https://trampou-api.onrender.com'}/notificacoes/${id}/lida`, {
+      const url = role === "empresa" 
+        ? `https://trampou-api.onrender.com/notificacoes/empresa/${id}/lida`
+        : `https://trampou-api.onrender.com/notificacoes/${id}/lida`;
+
+      await fetch(url, {
         method: "PUT",
         headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
       });
-      setNotificacoesCandidato(prev => prev.map(n => n.id === id ? { ...n, lida: true } : n));
+      
+      if (role === "empresa") {
+        setNotificacoesEmpresa(prev => prev.map(n => n.id === id ? { ...n, lida: true } : n));
+      } else {
+        setNotificacoesCandidato(prev => prev.map(n => n.id === id ? { ...n, lida: true } : n));
+      }
     } catch(err) {
       console.error(err);
     }
   };
-
-  const notificacoesEmpresa = [];
 
   if (!role) return null;
 
