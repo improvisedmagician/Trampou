@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI
 from database import engine, Base
-from routers import empresas, candidatos, vagas, candidaturas
+from routers import empresas, candidatos, vagas, candidaturas, notificacoes
 from routers import auth as auth_router
 import models
 
@@ -69,6 +69,7 @@ app.include_router(empresas.router)
 app.include_router(candidatos.router)
 app.include_router(vagas.router)
 app.include_router(candidaturas.router)
+app.include_router(notificacoes.router)
 
 @app.get("/")
 def read_root():
