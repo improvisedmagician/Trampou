@@ -12,48 +12,45 @@ export default function UploadCurriculo({ params }) {
   const [file, setFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     if(e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
-    }
-  };
+      const selectedFile = e.target.files[0];
+      setFile(selectedFile);
+      
+      // Auto submit as soon as file is selected, matching mockup
+      setIsSubmitting(true);
+      const token = localStorage.getItem("token");
+      const role = localStorage.getItem("role");
+      
+      if (!token || role !== "candidato") {
+        alert("Você precisa estar logado como candidato para se candidatar.");
+        setIsSubmitting(false);
+        router.push("/auth");
+        return;
+      }
 
-  const handleApply = async (e) => {
-    e.preventDefault();
-    if(!file) return alert("Por favor, selecione um PDF primeiro.");
-    
-    setIsSubmitting(true);
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-    
-    if (!token || role !== "candidato") {
-      alert("Você precisa estar logado como candidato para se candidatar.");
-      setIsSubmitting(false);
-      router.push("/auth");
-      return;
-    }
+      const formData = new FormData();
+      formData.append("fk_vaga", vagaId);
+      formData.append("curriculo", selectedFile);
 
-    const formData = new FormData();
-    formData.append("fk_vaga", vagaId);
-    formData.append("curriculo", file);
-
-    try {
-      const response = await fetch("https://trampou-api.onrender.com/candidaturas/", {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${token}` },
-        body: formData
-      });
-      if(response.ok) {
-        router.push("/sucesso");
-      } else {
-        const error = await response.json();
-        alert("Erro: " + error.detail);
+      try {
+        const response = await fetch("https://trampou-api.onrender.com/candidaturas/", {
+          method: "POST",
+          headers: { "Authorization": `Bearer ${token}` },
+          body: formData
+        });
+        if(response.ok) {
+          router.push("/sucesso");
+        } else {
+          const error = await response.json();
+          alert("Erro: " + error.detail);
+          setIsSubmitting(false);
+        }
+      } catch(err) {
+        console.error(err);
+        alert("Erro ao conectar com o servidor.");
         setIsSubmitting(false);
       }
-    } catch(err) {
-      console.error(err);
-      alert("Erro ao conectar com o servidor.");
-      setIsSubmitting(false);
     }
   };
 
@@ -78,37 +75,37 @@ export default function UploadCurriculo({ params }) {
             accept=".pdf" 
             className="hidden" 
             onChange={handleFileChange} 
+            disabled={isSubmitting}
           />
         </label>
 
         {/* File Preview */}
         {file && (
-          <div className="bg-white border border-neutral-200 rounded-lg p-4 flex items-center gap-3 mb-auto">
+          <div className="bg-white border border-neutral-200 rounded-lg p-4 flex items-center gap-3 mb-auto shadow-sm">
             <DocumentIcon className="w-8 h-8 text-primary-500 flex-shrink-0" />
             <div className="flex-1 overflow-hidden">
               <p className="text-sm font-bold text-neutral-800 truncate">{file.name}</p>
               <div className="mt-2 w-full bg-neutral-100 rounded-full h-1.5">
-                <div className="bg-primary-500 h-1.5 rounded-full" style={{width: isSubmitting ? "70%" : "100%"}}></div>
+                <div className="bg-primary-500 h-1.5 rounded-full" style={{width: isSubmitting ? "70%" : "100%", transition: "width 0.5s ease-in-out"}}></div>
               </div>
-              <p className="text-xs text-neutral-500 mt-1">{isSubmitting ? "Enviando... 70%" : "Pronto para enviar"}</p>
+              <p className="text-xs text-neutral-500 mt-1">{isSubmitting ? "Enviando... 70%" : "Enviado"}</p>
             </div>
           </div>
         )}
 
         {/* Footer Button */}
-        <div className="mt-8 flex flex-col gap-3">
-          {file && (
-            <button 
-              onClick={handleApply}
-              disabled={isSubmitting}
-              className="w-full py-4 rounded-xl font-bold text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-sm"
-            >
-              ENVIAR CURRÍCULO
-            </button>
-          )}
+        <div className="mt-auto pt-8 flex flex-col gap-3">
           <button 
-            onClick={() => router.back()}
-            className="w-full py-4 rounded-xl font-bold text-neutral-700 bg-transparent border border-primary-300 hover:bg-primary-50 transition-colors"
+            onClick={() => {
+              if (isSubmitting) {
+                // To cancel an ongoing request would require an AbortController,
+                // but for mockup fidelity, just go back.
+                router.back();
+              } else {
+                router.back();
+              }
+            }}
+            className={`w-full py-4 rounded-xl font-bold transition-colors border ${isSubmitting ? 'border-primary-400 text-primary-600 bg-transparent' : 'border-primary-500 text-neutral-900 bg-transparent hover:bg-primary-50'}`}
           >
             CANCELAR
           </button>

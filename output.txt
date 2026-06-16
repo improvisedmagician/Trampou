@@ -1,0 +1,54 @@
+Page 11: ●​ O layout deve se comportar corretamente em telas de smartphones, tablets e desktops 
+Page 14: um filtro, e a tela é atualizada em menos de 3 segundos apenas com as vagas 
+Page 15: funcionalidade, legibilidade e adaptação visual em telas de smartphones, tablets e 
+Page 18: Figura 1 - Modelo ER 
+Page 23: Figura 2 - Panorama Geral do Diagrama de Sequência
+Page 23: Figura 3 - Dimensão Esquerda do Panorama Geral do Diagrama de Sequência
+Page 24: Figura 4 - Dimensão Central do Panorama Geral do Diagrama de Sequência
+Page 24: Figura 5 - Dimensão Direita do Panorama Geral do Diagrama de Sequência
+Page 25: Figura 6 - Diagrama de Estados
+Page 26: Figura 7 -  Diagrama de Caso de Uso 
+Page 27: Figura 8 - Panorama Geral do Diagrama de Classes 
+Page 28: Figura 9 - Panorama Geral do Diagrama de Componentes 
+Page 28: Figura 10 - Dimensão Esquerda do Panorama Geral do Diagrama de Componentes 
+Page 29: Figura 11 - Dimensão Central do Panorama Geral do Diagrama de Componentes 
+Page 29: Figura 12 - Dimensão Direito do Panorama Geral do Diagrama de Componentes
+Page 30: Figura 13 - Panorama Geral do Diagrama de Arquitetura​
+Page 31: Figura 14 - Panorama geral do mapeamento objeto relacional 
+Page 31: Figura 15 - Dimensão esquerda do mapeamento objeto relacional 
+Page 32: Figura 16 - Panorama direito Objeto-Relacional 
+Page 34: Figura 1 - Tela 1: Mural de Vagas (Home)  
+Page 35: Figura 2 Tela 2: Autenticação (Login e Cadastro) 
+Page 36: Figura 3 Tela 3: Perfil Digital do Candidato  
+Page 37: Figura 4 Tela 4: Upload de Currículo (Anexar PDF)  
+Page 38: Figura 5 Tela 5: Tela de Sucesso (Candidatura ou Vaga Salva)  
+Page 39: Figura 6 Tela 6: Painel Gestor (Dashboard)  
+Page 40: Figura 7 Tela 7: Criação/Edição de Vaga (Formulário)  
+Page 41: Figura 8 Tela 8: Central de Notificações  
+Page 42: Figura 9 Tela 1: Mural de Vagas (Home)  
+Page 43: Figura 10 Tela 2: Autenticação (Login e Cadastro) 
+Page 44: Figura 11 Tela 3: Perfil Digital do Candidato 
+Page 45: Figura 12 Tela 4: Upload de Currículo (Anexar PDF) ​
+Page 46: Figura 13 Tela 5: Tela de Sucesso (Candidatura ou Vaga Salva)  
+Page 47: Figura 14 Tela 6: Painel Gestor (Dashboard)  
+Page 48: Figura 15 Tela 7: Criação/Edição de Vaga (Formulário)  
+Page 49: Figura 16 Tela 8: Central de Notificações  
+Page 50: Figura 17 - Dimensão Geral do Fluxo de Navegação 
+Page 51: Figura 2 - Dimensão Esquerda do Fluxo de Navegação
+Page 52: Figura 18 - Dimensão Central do Fluxo de Navegação
+Page 53: Figura 3 - Dimensão Direita do Fluxo de Navegação
+Page 55: arquitetura encontra-se ilustrada no Diagrama de Arquitetura (Figura X - Seção 3.3.1). 
+Page 57: ●​ Singleton: Aplicado na configuração de conexão com o banco de dados, garantindo 
+Page 57: ●​ Segurança Básica: Configurações sensíveis (credenciais de banco e chaves secretas) 
+Page 60: sistema, é necessário acessar a tela de Autenticação. 
+Page 60: 2.​ Seleção de Perfil: Na tela de autenticação, o usuário deve utilizar as abas superiores 
+Page 61: Figura 10 Tela 2: Autenticação (Login e Cadastro) 
+Page 62: 6.2.1 Configuração do Perfil Digital e Currículo 
+Page 63: Figura 12 Tela 4: Upload de Currículo (Anexar PDF) ​
+Page 64: 4.​ Se o perfil digital estiver completo, o sistema exibirá uma tela de confirmação ("Ação 
+Page 65: Figura 13 Tela 5: Tela de Sucesso (Candidatura ou Vaga Salva)  
+Page 66: 1.​ Painel de Status: Na tela "Meu Perfil", o candidato visualiza um resumo quantitativo 
+Page 67: Figura 16 Tela 8: Central de Notificações  
+Page 68: em uma única tela. 
+Page 69: Figura 14 Tela 6: Painel Gestor (Dashboard)  
+Page 71: Figura 14 Tela 6: Painel Gestor (Dashboard)  
