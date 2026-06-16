@@ -103,15 +103,23 @@ export default function Notificacoes() {
               }
 
               // Parse date to a friendly string (mockup style)
-              const date = new Date(notif.data_criacao);
+              let dateStr = notif.data_criacao;
+              if (dateStr && !dateStr.endsWith('Z')) {
+                // Ensure the browser interprets the naive datetime from the DB as UTC
+                dateStr += 'Z';
+              }
+              const date = new Date(dateStr);
               const now = new Date();
-              const diffMs = now - date;
+              let diffMs = now - date;
+              if (diffMs < 0) diffMs = 0; // Prevent negative times if slight clock sync differences
+              
               const diffMins = Math.floor(diffMs / 60000);
               const diffHours = Math.floor(diffMins / 60);
               const diffDays = Math.floor(diffHours / 24);
               
               let timeStr = "agora";
-              if (diffMins < 60) timeStr = `há ${diffMins} min`;
+              if (diffMins === 0) timeStr = "agora";
+              else if (diffMins < 60) timeStr = `há ${diffMins} min`;
               else if (diffHours < 24) timeStr = `há ${diffHours} hora${diffHours > 1 ? 's' : ''}`;
               else if (diffDays === 1) timeStr = "ontem";
               else timeStr = `há ${diffDays} dias`;
@@ -130,11 +138,11 @@ export default function Notificacoes() {
                     <p className="text-sm text-neutral-600 leading-snug pr-2">{notif.mensagem}</p>
                   </div>
                   <div className="flex flex-col items-end gap-2 pt-1 flex-shrink-0">
-                    <span className="text-sm text-neutral-500 text-right">
+                    <span className="text-sm text-neutral-500 text-right whitespace-nowrap">
                       {timeStr}
                     </span>
                     {!notif.lida && (
-                      <div className="w-2.5 h-2.5 rounded-full bg-primary-500"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-primary-500 mt-1"></div>
                     )}
                   </div>
                 </div>
