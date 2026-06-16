@@ -31,6 +31,16 @@ def create_candidatura(
     db.commit()
     db.refresh(db_candidatura)
 
+    # Notificar a empresa
+    vaga = db.query(models.Vaga).filter(models.Vaga.id == fk_vaga).first()
+    if vaga:
+        nova_notificacao_empresa = models.NotificacaoEmpresa(
+            fk_empresa=vaga.id_empresa,
+            mensagem=f"O candidato {current_candidato.nome} enviou um currículo para a vaga '{vaga.titulo}'."
+        )
+        db.add(nova_notificacao_empresa)
+        db.commit()
+
     from logger import log_action
     log_action("Candidaturas", f"Candidato ID {current_candidato.id} enviou currículo para a Vaga ID {fk_vaga}")
 
