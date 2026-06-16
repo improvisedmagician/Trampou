@@ -58,7 +58,7 @@ class NotificacaoOut(BaseModel):
     data_criacao: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class VagaBase(BaseModel):
     titulo: str = Field(min_length=5, max_length=100)
