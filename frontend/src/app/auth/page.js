@@ -114,7 +114,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="flex-1 flex flex-col p-5 bg-red-50 font-sans antialiased min-h-screen relative">
+    <div className="flex-1 flex flex-col p-5 bg-primary-50 font-sans antialiased min-h-screen relative">
       <header className="absolute top-4 left-4 z-10">
         <button onClick={() => router.push("/")} className="text-primary-700 p-2 transition-colors flex items-center justify-center">
           <ArrowLeftIcon className="w-6 h-6" />
