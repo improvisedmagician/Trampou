@@ -97,3 +97,10 @@ def ler_logs():
             return {"logs": f.readlines()}
     except FileNotFoundError:
         return {"logs": ["Nenhum log encontrado ainda."]}
+
+@app.get("/debug/reset_db")
+def reset_db():
+    import database
+    models.Base.metadata.drop_all(bind=database.engine)
+    models.Base.metadata.create_all(bind=database.engine)
+    return {"status": "Banco de dados limpo com sucesso! Todas as contas e vagas foram apagadas."}
