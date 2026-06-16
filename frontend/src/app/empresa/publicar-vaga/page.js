@@ -49,54 +49,80 @@ export default function PublicarVaga() {
   }
 
   return (
-    <div className="bg-[#FAFAFA] font-sans min-h-screen flex flex-col pb-20">
-      <header className="bg-white border-b border-neutral-100 px-4 py-4 flex items-center sticky top-0 z-10 shadow-sm">
-        <button onClick={() => router.back()} className="mr-4 text-neutral-900 hover:bg-neutral-100 p-2 rounded-full transition-colors">
+    <div className="bg-primary-50 font-sans min-h-screen flex flex-col">
+      <header className="bg-primary-50 border-b border-neutral-200 px-4 py-4 flex items-center sticky top-0 z-10">
+        <button onClick={() => router.back()} className="mr-4 text-primary-700 p-2">
           <ArrowLeftIcon className="w-6 h-6" />
         </button>
-        <h1 className="text-xl font-bold text-[#000000] flex-1 text-center pr-10">Publicar Vaga</h1>
+        <h1 className="text-xl font-bold text-primary-700 flex-1 text-center pr-10">Publicar Vaga</h1>
       </header>
-      <div className="pt-6 pb-2">
-        <main className="px-5 max-w-2xl mx-auto w-full">
 
+      <main className="flex-1 w-full flex flex-col pt-6">
         {error && (
-          <div className="bg-red-50 text-red-600 border border-red-200 p-4 rounded-lg mb-6 text-sm font-medium">
+          <div className="bg-red-50 text-red-600 border border-red-200 p-4 mx-5 mb-6 text-sm font-medium">
             {error}
           </div>
         )}
 
-        <form id="vaga-form" onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-sm border border-neutral-100 flex flex-col gap-6">
-          <div>
-            <label htmlFor="titulo" className="block text-sm font-medium text-neutral-900 mb-1">Título da Vaga</label>
-            <input id="titulo" value={formData.titulo} onChange={handleChange} required type="text" className="w-full bg-white border border-neutral-300 rounded-lg px-4 py-3 text-neutral-900 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" />
+        <form id="vaga-form" onSubmit={handleSubmit} className="flex flex-col flex-1">
+          <div className="px-5 flex flex-col gap-4 flex-1">
+            <input 
+              id="titulo" 
+              value={formData.titulo} 
+              onChange={handleChange} 
+              required 
+              type="text" 
+              placeholder="Título da Vaga"
+              className="w-full bg-white border border-neutral-300 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" 
+            />
+
+            <input 
+              id="salario" 
+              value={formData.salario} 
+              onChange={handleChange} 
+              type="text" 
+              placeholder="Salário (Opcional)"
+              className="w-full bg-white border border-neutral-300 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" 
+            />
+
+            <textarea 
+              id="descricao" 
+              value={formData.descricao} 
+              onChange={handleChange} 
+              required 
+              rows="6" 
+              placeholder="Requisitos"
+              className="w-full bg-white border border-neutral-300 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors resize-none" 
+            />
+
+            <input 
+              id="cidade" 
+              value={formData.cidade} 
+              onChange={handleChange} 
+              required 
+              type="text" 
+              placeholder="Cidade"
+              className="w-full bg-white border border-neutral-300 px-4 py-4 text-neutral-900 placeholder:text-neutral-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" 
+            />
           </div>
 
-          <div>
-            <label htmlFor="salario" className="block text-sm font-medium text-neutral-900 mb-1">Salário (Opcional)</label>
-            <input id="salario" value={formData.salario} onChange={handleChange} type="text" className="w-full bg-white border border-neutral-300 rounded-lg px-4 py-3 text-neutral-900 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" />
-          </div>
-
-          <div>
-            <label htmlFor="descricao" className="block text-sm font-medium text-neutral-900 mb-1">Requisitos</label>
-            <textarea id="descricao" value={formData.descricao} onChange={handleChange} required rows="4" className="w-full bg-white border border-neutral-300 rounded-lg px-4 py-3 text-neutral-900 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors resize-none" />
-          </div>
-
-          <div>
-            <label htmlFor="cidade" className="block text-sm font-medium text-neutral-900 mb-1">Cidade</label>
-            <input id="cidade" value={formData.cidade} onChange={handleChange} required type="text" className="w-full bg-white border border-neutral-300 rounded-lg px-4 py-3 text-neutral-900 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors" />
-          </div>
-
-          <div className="pt-4 border-t border-neutral-100 flex gap-4">
-            <Link href="/empresa/dashboard" className="flex-1 text-center py-2.5 text-neutral-600 font-semibold border border-neutral-300 rounded-lg hover:bg-neutral-100 transition-colors">
+          <div className="mt-auto border-t border-neutral-200 bg-primary-50 px-5 py-5 flex gap-4 mt-8">
+            <button 
+              type="button"
+              onClick={() => router.back()}
+              className="flex-1 text-center py-4 text-primary-700 font-medium border border-primary-500 bg-white hover:bg-primary-50 transition-colors"
+            >
               Cancelar
-            </Link>
-            <button type="submit" className="flex-1 bg-primary-600 text-white font-semibold py-2.5 rounded-lg hover:bg-primary-700 transition-colors">
+            </button>
+            <button 
+              type="submit" 
+              className="flex-1 text-center py-4 text-white font-medium bg-primary-700 hover:bg-primary-600 transition-colors"
+            >
               Publicar Vaga
             </button>
           </div>
         </form>
       </main>
-      </div>
     </div>
   );
 }
