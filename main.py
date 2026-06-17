@@ -85,7 +85,7 @@ class LogEntry(BaseModel):
 
 @app.post("/debug/logs")
 def registrar_log(entry: LogEntry):
-    with open("system_logs.txt", "a", encoding="utf-8") as f:
+    with open("testes e log/system_logs.txt", "a", encoding="utf-8") as f:
         timestamp = datetime.datetime.now().isoformat()
         f.write(f"[{timestamp}] [{entry.source}] {entry.message} | Details: {entry.error_details}\n")
     return {"status": "Log registrado"}
@@ -93,7 +93,7 @@ def registrar_log(entry: LogEntry):
 @app.get("/debug/logs")
 def ler_logs():
     try:
-        with open("system_logs.txt", "r", encoding="utf-8") as f:
+        with open("testes e log/system_logs.txt", "r", encoding="utf-8") as f:
             return {"logs": f.readlines()}
     except FileNotFoundError:
         return {"logs": ["Nenhum log encontrado ainda."]}

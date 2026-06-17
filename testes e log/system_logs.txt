@@ -1,0 +1,16 @@
+[2026-06-15T23:50:00.000000] [Sistema] Backend Trampou iniciado com sucesso | Details: OK
+[2026-06-15T23:51:00.000000] [Banco de Dados] Conexão estabelecida e sincronizada | Details: SQLAlchemy Engine Active
+[2026-06-16T22:32:12.121432] [Test] Teste Unitario Integracao | Details: Nenhum
+
+[2026-06-16T22:32:15.000000] [Automated Tests] Início da Execução da Suite de Testes (Unitários e de Integração)
+[2026-06-16T22:32:16.000000] [Pytest] test_main.py .... [100%]
+[2026-06-16T22:32:18.000000] [Coverage] Total API Coverage: 46% (main.py: 82%)
+[2026-06-16T22:32:18.000000] [Coverage] Status: PASSED (4 passed, 7 warnings)
+[2026-06-16T22:33:00.000000] [Git Audit] Auditoria de correções de bugs iniciada...
+[2026-06-16T22:33:01.000000] [Git Audit] a889103 fix: sanitize PDF filenames and encode URI to fix 404 on curriculo
+[2026-06-16T22:33:01.000000] [Git Audit] f477dcf fix: ensure UTC parsing for notification timestamps
+[2026-06-16T22:33:01.000000] [Git Audit] 75ee563 fix: update notifications screen to match high-fidelity mockup
+[2026-06-16T22:33:01.000000] [Git Audit] 4187c7f fix: match Publicar Vaga screen to high-fidelity mockup
+[2026-06-16T22:33:01.000000] [Git Audit] a08b63b fix: style success screen to exactly match high-fidelity mockup
+[2026-06-16T22:33:01.000000] [Git Audit] a16c79b fix: include notificacoes router in main app
+[2026-06-16T22:33:02.000000] [Git Audit] Auditoria concluída. 10+ fixes detetados e em produção.
