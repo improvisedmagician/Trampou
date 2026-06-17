@@ -1,0 +1,63 @@
+f9a4b81 chore: add git bug fixes log to testes e log folder
+109401e chore: move tests and logs to designated folder
+a889103 fix: sanitize PDF filenames and encode URI to fix 404 on curriculo
+20ccd63 style: center the form in Publicar Vaga screen on larger displays
+3a8ce21 style: revert auth and profile background to original colors
+4629c60 style: update auth and profile background to bg-red-50
+377d445 style: revert auth page background to primary-50
+66f6c54 style: update auth page background color to match specific hex
+19b08a7 style: apply pixel-perfect tweaks to Auth screen (rounded corners, spacing)
+53025e6 style: update home page to perfectly match Figura 9 High Fidelity Mockup
+a79cb1b style: update auth page to perfectly match Figura 10 High Fidelity Mockup
+3b2d8fe style: remove opacity from read notifications
+f477dcf fix: ensure UTC parsing for notification timestamps to avoid negative/wrong times
+02f77fd style: centralize notification list
+75ee563 fix: update notifications screen to match high-fidelity mockup
+3e55854 feat: create notification for company when candidate applies
+4187c7f fix: match Publicar Vaga screen to high-fidelity mockup
+a08b63b fix: style success screen to exactly match high-fidelity mockup
+40033e1 chore: clean up extracted images from pdf
+57af057 feat: match upload and success screens to high fidelity mockups
+9517196 chore: remove unnecessary files
+03b80eb feat: add debug endpoint to reset database
+a16c79b fix: include notificacoes router in main app
+7b3f943 fix: load empresa notifications on page
+ee91e9f feat: add welcome notification for empresas
+a3ca1d8 fix: update orm_mode to from_attributes for NotificacaoOut
+0cd849c feat: Add audit trail logging for CRUD actions
+fcefc21 feat: Add logout button to profiles
+d84e92e feat: Add login required modal on home page
+5a8c56f feat: Add welcome notification and dynamic unread dot
+e3d4168 UI: Make layouts fully responsive for Desktop browsers
+243662a Docs: Update README with detailed user manual
+04f1140 Feat: Add application status update dropdown for companies and fix mismatch
+37d7d04 Fix: Route empresa to correct profile and remove mock notifications
+761f172 Fix: Strip special chars from CPF and CNPJ in auth payloads
+1da7253 Fix: Add automatic table migrations on startup
+a7eda01 Fix: Hide Email and show CNPJ on company login
+b373ee0 Feat: Add logo upload for companies
+4039320 Docs: Add comprehensive README.md
+4a6b3ce UI: Add profile picture upload to candidate profile
+7df6cd2 Backend: Support profile picture upload for candidates
+522f2dc UI: Shrink and center Vagas tabs and header
+37f0e1c Feat: Add Candidaturas tab to Vagas page and /minhas backend endpoint
+8f25f64 Fix: Resolve syntax error in page.js preventing Vercel build
+8bef26d UI: Format salary as BRL currency and use hyphen for empty
+5b074bb UI: Limit home jobs to 5, mock varied company names for better presentation
+6e66b91 UI: Refactor vagas tab to show all jobs directory with search
+a4d3177 UI: Link VER TODAS button to vagas tab
+5803bbd UI/Backend: Wire full application flow, fix success screen, fix stats
+052b979 UI: Fix footer overlap on candidate profile by hiding global bottom nav
+6e731d0 UI: Update candidate profile precisely to match Figura 11 layout (Tela 3)
+04e4f9a UI: Refactor Candidato Perfil to match PDF Mockup visual design with read-only view
+4036639 Fix: React crash on Notificacoes when API returns error object instead of array
+5299d12 UI: Add CPF and CNPJ mask validation to auth page
+8fe31e3 Fix CORS credentials issue and add back button to auth page
+5901706 Fix: Hardcode API URL to bypass Vercel env bugs
+c3d5cc2 Add debug logs endpoint and tracking
+bcea085 UI: dynamic company name, logo and city on job board
+eebc2b5 UI: unify background to #fff8f6 on home to match mockup
+44829c8 UI: Standardize back arrows according to PDF
+4d53f56 Update seed.py with more diverse jobs
+265e870 Fix render.yaml and add requirements
+07e9d4a Initial commit - Trampou Project
