@@ -16,7 +16,9 @@ def create_candidatura(
     if not curriculo.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Apenas arquivos PDF são permitidos.")
         
-    file_name = f"candidato_{current_candidato.id}_vaga_{fk_vaga}_{curriculo.filename}"
+    import re
+    safe_filename = re.sub(r'[^A-Za-z0-9_.-]', '_', curriculo.filename)
+    file_name = f"candidato_{current_candidato.id}_vaga_{fk_vaga}_{safe_filename}"
     file_path = os.path.join("uploads", file_name)
     
     with open(file_path, "wb") as buffer:

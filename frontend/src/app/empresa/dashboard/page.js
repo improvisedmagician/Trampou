@@ -201,7 +201,8 @@ export default function EmpresaDashboard() {
               ) : (
                 <div className="flex flex-col gap-4">
                   {candidatos.map((c, index) => {
-                    const pdfUrl = `${'https://trampou-api.onrender.com'}/${c.caminho_curriculo_pdf.replace(/\\/g, '/')}`;
+                    const filePath = c.caminho_curriculo_pdf.replace(/\\/g, '/');
+                    const pdfUrl = `${'https://trampou-api.onrender.com'}/${encodeURI(filePath)}`;
                     return (
                       <div key={index} className="bg-neutral-50 p-4 rounded-lg border border-neutral-200 flex justify-between items-center">
                         <div>
