@@ -1,0 +1,10 @@
+a889103 fix: sanitize PDF filenames and encode URI to fix 404 on curriculo
+f477dcf fix: ensure UTC parsing for notification timestamps to avoid negative/wrong times
+75ee563 fix: update notifications screen to match high-fidelity mockup
+4187c7f fix: match Publicar Vaga screen to high-fidelity mockup
+a08b63b fix: style success screen to exactly match high-fidelity mockup
+a16c79b fix: include notificacoes router in main app
+7b3f943 fix: load empresa notifications on page
+a3ca1d8 fix: update orm_mode to from_attributes for NotificacaoOut
+04f1140 Feat: Add application status update dropdown for companies and fix mismatch
+5803bbd UI/Backend: Wire full application flow, fix success screen, fix stats
